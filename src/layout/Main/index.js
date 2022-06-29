@@ -1,9 +1,18 @@
+import Header from '../Header';
+import Footer from '../Footer';
+import { Container } from '@mui/material'
 
 function Main({children}) {
   return (
-    <main>
-      {children}
-    </main>
+    <>
+      <Header/>
+      <main>
+        <Container maxWidth="xl">
+          {children}
+        </Container>
+      </main>
+      <Footer/>
+    </>
   )
 }
 

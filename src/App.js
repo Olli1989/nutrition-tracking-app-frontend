@@ -2,6 +2,7 @@ import {lazy, Suspense } from 'react';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 import * as ROUTES from './constants/routes';
+import './app.css'
 
 const Dashboard = lazy(() => import('./pages/Dashboard'));
 const FoodDiary = lazy(() => import('./pages/FoodDiary'));

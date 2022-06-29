@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import Header from '../../layout/Header/'
+import Main from '../../layout/Main'
 
 import UserContext from '../../context/UserContext'
 
@@ -11,14 +11,15 @@ export default function Dashboard () {
 
   return (
     <>
-      <Header />
-      {
-        !user ? (
-          <h1>Startseite</h1>
-        ) : (
-          <h1>Dashboard</h1>
-        )
-      }
+      <Main>
+        {
+          !user ? (
+            <h1>Startseite</h1>
+          ) : (
+            <h1>Dashboard</h1>
+          )
+        }
+      </Main>
     </>
   )
 }
