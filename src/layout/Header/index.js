@@ -24,15 +24,15 @@ export default function Header() {
   }
 
   return (
-    <header className="header">
-      <AppBar position="static" >
+    <header>
+      <AppBar position="static" color="default">
         <Container maxWidth="xl">
           <Toolbar sx={{padding: 0}}>
             <Typography variant="h4" component="h1">
               Food Tracker App
             </Typography>
             
-            <Button variant="contained" sx={{marginLeft: "auto", mr:"1rem"}} color="secondary">
+            <Button variant="outlined" sx={{marginLeft: "auto", mr:"1rem"}} color="secondary">
               Login
             </Button>
             <Button variant="contained" color="secondary">
