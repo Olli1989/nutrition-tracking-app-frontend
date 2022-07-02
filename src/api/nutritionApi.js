@@ -18,4 +18,23 @@ export const productInfoBarcode = (data) => API.post('/product/barcode', data);
 //https://de.openfoodfacts.org/cgi/search.pl?search_terms=monster+ultra+paradise&action=process&json=true
 //Barcode
 //https://de.openfoodfacts.org/api/v0/product/5060639129287.json
+/*
+call to backend
+useEffect(()=>{
 
+  const getNutritionNameFacts = async function(){
+    
+    try {
+        const res = await productInfoBarcode({searchTerm: "huhn"});
+        console.log(res)
+        
+    } catch (e){
+        console.log(e)
+    }
+  }
+
+getNutritionNameFacts()
+
+
+},[])
+*/
