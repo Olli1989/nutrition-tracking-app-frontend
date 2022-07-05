@@ -19,7 +19,7 @@ function App() {
 
   //const { user } = useContext(UserContext)
 
-  let user = null;
+  let user = {};
 
   return (
     <Router>

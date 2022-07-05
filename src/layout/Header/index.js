@@ -25,7 +25,7 @@ export default function Header() {
 
   return (
     <header>
-      <AppBar position="static" color="default">
+      <AppBar position="static" color="success">
         <Container maxWidth="xl">
           <Toolbar sx={{padding: 0}}>
             <Typography variant="h4" component="h1">
