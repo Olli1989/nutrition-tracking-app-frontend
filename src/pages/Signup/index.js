@@ -1,8 +1,22 @@
 import React from 'react'
+import { Box } from '@mui/material'
+
+import SignupComp from '../../components/SignupComp'
+import './signup.css'
 
 function SignUp() {
   return (
-    <div>SignUp</div>
+    <main>
+      <Box sx={{
+        minHeight: '100vh',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+      }}>
+        <SignupComp />
+      </Box>
+    </main>
+    
   )
 }
 

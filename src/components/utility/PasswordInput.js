@@ -9,7 +9,6 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 export default function PasswordInput ({password, setPassword}){
 
     const handleClickShowPassword = () => {
-        console.log("click")
         setPassword({
         ...password,
         showPassword: !password.showPassword,
@@ -19,7 +18,7 @@ export default function PasswordInput ({password, setPassword}){
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
-    console.log(password)
+    
 
     return (
         <FormControl variant="outlined" sx={{mb: 1}}>

@@ -1,7 +1,8 @@
 import { useContext } from 'react'
+import { Link } from 'react-router-dom'
 
 import UserContext from '../../context/UserContext'
-import * as Routes from '../../constants/routes'
+import * as ROUTES from '../../constants/routes'
 import './header.css'
 
 import { 
@@ -32,7 +33,7 @@ export default function Header() {
               Food Tracker App
             </Typography>
             
-            <Button variant="outlined" sx={{marginLeft: "auto", mr:"1rem"}} color="secondary">
+            <Button component={Link} to={ROUTES.LOGIN} variant="outlined" sx={{marginLeft: "auto", mr:"1rem"}} color="secondary">
               Login
             </Button>
             <Button variant="contained" color="secondary">
