@@ -1,6 +1,6 @@
 import React from 'react'
 import { createPortal } from 'react-dom'
-import { Box, Paper, Typography } from '@mui/material'
+import { Box, Paper, Typography, IconButton } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close';
 
 function AGBModal({open, onClose}) {
@@ -8,19 +8,21 @@ function AGBModal({open, onClose}) {
     open ?
       createPortal(
         <Box 
-            sx={{minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems:'center'}}
+            sx={{minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems:'center', backgroundColo: 'red', position: 'fixed', top: 0, left: 0, right: 0, p: 1}}
             onClick = {onClose}
         >
             <Paper
-                sx={{position: 'relative', backgroundColor: 'green', height: '500px'}}
+                sx={{display: 'flex', justifyContent: 'center', alignItems:'center', position: 'relative', top: 4, left: 4, backgroundColor: 'rgb(209, 209, 209)', height: '500px', p:2}}
             >
-                <CloseIcon
-                    sx={{position: 'absolute', top: 1, right: 1}}
-                    onClick = {onClose}
-                />
-                <Typography variant="h6">
-                    This project is way too small for real AGB's just enjoy the stay
-                </Typography>
+              <IconButton
+                sx={{position: 'absolute', top: 1, right: 1}}
+                onClick = {onClose}
+              >
+                <CloseIcon/>
+              </IconButton>
+              <Typography variant="h6">
+                  This project is way too small for real AGB's just enjoy the stay
+              </Typography>
             </Paper>
         </Box>
         

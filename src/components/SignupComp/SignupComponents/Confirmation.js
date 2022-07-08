@@ -1,20 +1,21 @@
 import React, { useState } from 'react'
-import { Typography, Checkbox, Box, Button } from '@mui/material'
+import { Typography, Checkbox, Box, Button, Fab } from '@mui/material'
 
 import AGBModal from './AGBModal'
 
-function Confirmation({handleChange, values}) {
+function Confirmation({handleChange, values, handleSignUp}) {
   const [openAGBModal, setOpenAGBModal] = useState(false)
 
-  console.log(openAGBModal)
   return (
     <>
       <Typography variant="h5" component="h3" sx={{textAlign: 'center', mb: 1.5}}>
         Confirmation
       </Typography>
-
+      <Typography sx={{textAlign: 'center'}}>
+        Please confirm the AGB's
+      </Typography>
       <Box
-        sx={{display: 'flex', justifyContent: 'center' ,alignItems: 'center'}}
+        sx={{display: 'flex', justifyContent: 'center' ,alignItems: 'center', mb: 1.5}}
       >
         <Checkbox
           checked={values.agb}
@@ -28,6 +29,16 @@ function Confirmation({handleChange, values}) {
           AGB's
         </Button>
 
+      </Box>
+      <Box sx={{display: 'flex', justifyContent: 'center', mb:1.5}}>
+        <Button 
+          variant="outlined"
+          color="primary"
+          onClick={handleSignUp}
+          disabled={values.agb ? false: true}
+        >
+          Let's sign in
+        </Button>
       </Box>
 
       <AGBModal open={openAGBModal} onClose={() => setOpenAGBModal(false)} />

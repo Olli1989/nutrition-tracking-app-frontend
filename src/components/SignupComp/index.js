@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Paper, Typography } from '@mui/material'
 
 import UserDetails from './SignupComponents/UserDetails'
@@ -8,6 +8,7 @@ import Success from './SignupComponents/Success'
 import SignupHeader from './SignupComponents/SignupHeader'
 import LeftRightButton from './SignupComponents/LeftRightButton'
 import SignupFooterText from './SignupComponents/SignupFooterText'
+import * as api from '../../api/authApi'
 
 const formDataInit = {
   step: 1,
@@ -16,7 +17,7 @@ const formDataInit = {
   username:'',
   weight:0,
   height:0,
-  age: 0,
+  age: 18,
   gender: 'w',
   activityLevel: 0,
   intenseSport: false,
@@ -25,9 +26,9 @@ const formDataInit = {
 
 function Signup() {
 
-  const [formData, setFormData] = useState(formDataInit);
-  const [errorMessage, setErrorMessage] = useState('');
-  const [hover, setHover] = useState({left:false,right:false})
+  const [formData, setFormData] = useState(formDataInit)
+  const [errorMessageServer, setErrorMessageServer] = useState({status:0, message:''})
+  const [isSignup, setIsSignup] = useState(false)
 
   const { step } = formData
 
@@ -44,8 +45,24 @@ function Signup() {
   }
 
   const handleSignUp = () => {
-
+    setIsSignup(true)
   }
+
+  useEffect(()=>{
+    async function signupBackend () {
+      try {
+        console.log(formData.username, formData.email, formData.password)
+        const { data } = await api.signUp({username: formData.username, email: formData.email, password: formData.password })
+      } catch (e){
+        setErrorMessageServer({status: e.response.request.status, message:  e.response.data.message})
+      }
+      setIsSignup(false)      
+    }
+    
+    if(isSignup){
+      signupBackend()
+    }
+  }, [isSignup])
 
   const renderSwitch = (steps) => {
     switch (steps) {
@@ -75,13 +92,10 @@ function Signup() {
             <Confirmation
               handleChange = {handleChange}
               values = {formData} 
+              handleSignUp = {handleSignUp}
             />
             
           </>
-        )
-      case 4:
-        return (
-          <Success />
         )
       default:
         //there is nothing to do
