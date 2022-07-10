@@ -18,10 +18,8 @@ const NotFound = lazy(() => import('./pages/NotFound'));
 
 function App() {
 
-  //const { user } = useContext(UserContext)
-
-  let user = null;
-
+  const { user } = useContext(UserContext)
+  
   return (
     <Router>
         <Suspense fallback={<div>Loading...</div>}>

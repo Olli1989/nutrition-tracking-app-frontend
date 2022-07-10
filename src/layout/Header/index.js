@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 import UserContext from '../../context/UserContext'
@@ -11,6 +11,7 @@ import {
   Toolbar,
   Typography,
   Button,
+  Box,
 
 } from '@mui/material'
 
@@ -19,10 +20,15 @@ export default function Header() {
 
   const {user , setUser} = useContext(UserContext)
   
-
   const logOut = () => {
-    setUser(null)
+    setUser(null)  
   }
+
+  useEffect(()=>{
+    if(user == null){
+      sessionStorage.removeItem('user');
+    }
+  },[user])
 
   return (
     <header>
@@ -32,14 +38,32 @@ export default function Header() {
             <Typography variant="h4" component="h1">
               Food Tracker App
             </Typography>
+            <Box
+              sx={{ml: "auto"}}
+            >
+            {
+              user ? (
+                <>
+                  <Button variant="outlined" color="primary" onClick={logOut}>
+                    Log Out
+                  </Button>
+                </>
+              ):(
+                <>
+                  <Button component={Link} to={ROUTES.LOGIN} variant="outlined" sx={{mr:"1rem"}} color="primary">
+                    Login
+                  </Button>
+                  <Button component={Link} to={ROUTES.SIGN_UP} variant="contained" color="primary">
+                    Sign Up
+                  </Button>
+                </>
+              )
+            }
             
-            <Button component={Link} to={ROUTES.LOGIN} variant="outlined" sx={{marginLeft: "auto", mr:"1rem"}} color="secondary">
-              Login
-            </Button>
-            <Button variant="contained" color="secondary">
-              Sign Up
-            </Button>
+              
+            </Box>
           </Toolbar>
+
         </Container>
       </AppBar>
     </header>

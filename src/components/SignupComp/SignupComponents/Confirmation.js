@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Typography, Checkbox, Box, Button, Fab } from '@mui/material'
+import { Typography, Checkbox, Box, Button } from '@mui/material'
 
 import AGBModal from './AGBModal'
 

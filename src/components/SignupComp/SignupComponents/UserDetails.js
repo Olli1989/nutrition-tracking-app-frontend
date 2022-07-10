@@ -9,7 +9,7 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 
-function UserDetails({handleChange, values}) {
+function UserDetails({handleChange, values, errorMessage, setErrorMessage, errorMessageServer, setErrorMessageServer}) {
 
   const [showPassword, setShowPassword] = useState(false)
 
@@ -28,8 +28,9 @@ function UserDetails({handleChange, values}) {
         </Typography>
 
         <Box sx={{display:'flex', flexDirection:'column'}}>
-            <TextField id="outlined-basic" label="Username" variant="outlined" color='secondary' sx={{mb: 1.5}} value={values.username} onChange={(e) => {handleChange(e.target.value, 'username')}}/>
-            <TextField id="outlined-basic" label="E-Mail" variant="outlined" color='secondary' sx={{mb: 1.5}} value={values.email} onChange={(e) => {handleChange(e.target.value, 'email')}}/>
+            <TextField id="outlined-basic" label="Username" variant="outlined" color='secondary' sx={{mb: 1.5}} value={values.username} onChange={(e) => {handleChange(e.target.value, 'username')}}/>              
+            <TextField label="E-Mail" variant="outlined" color='secondary' sx={{mb: 1.5}} value={values.email} onChange={(e) => {setErrorMessage(prevState => ({...prevState, email:""})); handleChange(e.target.value, 'email')}}/>
+            
 
             <FormControl variant="outlined" color="secondary" sx={{mb: 1}}>
               <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
@@ -37,7 +38,12 @@ function UserDetails({handleChange, values}) {
                   id="outlined-adornment-password"
                   type={showPassword ? 'text' : 'password'}
                   value={values.password}
-                  onChange={(e) => {handleChange(e.target.value, 'password')}}
+                  onChange={(e) => {
+                    setErrorMessage(prevState => ({...prevState, password:""})); 
+                    handleChange(e.target.value, 'password');
+                    setErrorMessageServer({status:'', message:''})
+
+                  }}
                   endAdornment={
                   <InputAdornment position="end">
                       <IconButton
@@ -54,6 +60,10 @@ function UserDetails({handleChange, values}) {
               />
             </FormControl>
         </Box>
+
+        {(errorMessage.email) && <Typography color="error">{errorMessage.email}</Typography>}
+        {(errorMessage.password) && <Typography color="error">{errorMessage.password}</Typography>}
+        {(errorMessageServer.status == '400' ) && <Typography color="error">{errorMessageServer.message}</Typography>}
 
     </>
   )

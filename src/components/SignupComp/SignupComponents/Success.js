@@ -2,7 +2,7 @@ import React from 'react'
 
 function Success() {
   return (
-    <div>Success</div>
+    <div>Successfully signed up</div>
   )
 }
 

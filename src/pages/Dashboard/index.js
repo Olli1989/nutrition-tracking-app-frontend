@@ -9,9 +9,7 @@ export default function Dashboard () {
 
   const { user } = useContext(UserContext)
 
-  
-
-  
+ 
 
   return (
     <>
