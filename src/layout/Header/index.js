@@ -1,9 +1,10 @@
 import { useContext, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link as BrowserLink } from 'react-router-dom'
 
 import UserContext from '../../context/UserContext'
 import * as ROUTES from '../../constants/routes'
 import './header.css'
+import Logo from '../../assets/images/logo2.png'
 
 import { 
   AppBar, 
@@ -12,6 +13,7 @@ import {
   Typography,
   Button,
   Box,
+  Link
 
 } from '@mui/material'
 
@@ -35,16 +37,16 @@ export default function Header() {
       <AppBar position="static" color="primary">
         <Container maxWidth="xl">
           <Toolbar sx={{padding: 0}}>
-            <Typography variant="h4" component="h1">
-              Food Tracker App
-            </Typography>
+            <Link component={BrowserLink} to={ROUTES.DASHBOARD}>
+              <img className="logo" src={Logo} alt="App Logo" />
+            </Link>
             <Box
               sx={{ml: "auto"}}
             >
             {
               user ? (
                 <>
-                  <Button variant="outlined" color="primary" onClick={logOut}>
+                  <Button variant="outlined" color="secondary" onClick={logOut}>
                     Log Out
                   </Button>
                 </>

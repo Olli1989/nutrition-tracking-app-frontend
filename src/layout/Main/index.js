@@ -1,18 +1,19 @@
 import Header from '../Header';
 import Footer from '../Footer';
-import { Container } from '@mui/material'
+import { Container, Box } from '@mui/material'
 
 function Main({children}) {
   return (
-    <>
+
+    <Box sx={{display:'flex', flexDirection: 'column', minHeight: '100vh'}}>
       <Header/>
-      <main>
-        <Container maxWidth="xl">
+      <Container maxWidth="xl" sx={{flexGrow: 1}}>
+        <main>
           {children}
-        </Container>
-      </main>
+        </main>
+      </Container>
       <Footer/>
-    </>
+    </Box>
   )
 }
 

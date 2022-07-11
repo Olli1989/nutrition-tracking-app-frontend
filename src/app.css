@@ -1,3 +1,7 @@
+#root {
+  min-height: 100vh;
+}
+
 * {
   padding: 0;
   box-sizing: border-box;
@@ -14,11 +18,22 @@ img {
   border-radius: 5px;
 }
 
+/*--- Logo ---*/
+.logo {
+  width:125px
+}
+
 
 
 /*--- Dashboard Drag and Drop Testing ---*/
 
 .item {
   background-color: green;
+}
 
+.item:hover {
+  cursor:move; 
+  cursor:-webkit-grab; 
+  cursor:-moz-grab; 
+  cursor:grab;
 }

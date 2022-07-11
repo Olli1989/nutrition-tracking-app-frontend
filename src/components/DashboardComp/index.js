@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Responsive, WidthProvider } from 'react-grid-layout'
 
 function DashboardComp() {
+
+  const [isGrapping, setIsGrapping] = useState(false)
 
   const ResponsiveGridLayout = WidthProvider(Responsive)
 
@@ -13,6 +15,8 @@ function DashboardComp() {
     { i: "fifth", x:4, y:0, w:1, h:1 },
   ]
 
+ 
+
   return (
     <div>
       <ResponsiveGridLayout
@@ -21,6 +25,7 @@ function DashboardComp() {
         cols={{ lg: 3, md: 3, sm: 2, xs: 2, xxs: 1 }}
         rowHeight={100}
         width={1000}
+        compactType={'horizontal'}
       >
         <div key="first" className="item">
           <div>

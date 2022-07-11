@@ -22,6 +22,8 @@
     transition: none;
     z-index: 3;
     will-change: transform;
+
+    
   }
   
   .react-grid-item.dropping {
@@ -179,3 +181,8 @@
     transform: rotate(45deg);
   }
   
+  /*--- Custom ---*/
+  .react-draggable-transparent-selection .react-grid-item:hover,
+  .react-grid-item.react-draggable-dragging{
+    cursor: grabbing;
+  }

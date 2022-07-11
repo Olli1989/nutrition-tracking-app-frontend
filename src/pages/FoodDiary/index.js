@@ -1,8 +1,12 @@
 import React from 'react'
 
+import Main from '../../layout/Main'
+
 function FoodDiary() {
   return (
-    <div>FoodDiary</div>
+    <Main>
+
+    </Main>
   )
 }
 

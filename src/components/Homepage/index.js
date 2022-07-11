@@ -1,9 +1,9 @@
 import React from 'react'
 import { Typography, Grid, Box } from '@mui/material'
 
-import HomepageFood from  '../../assets/homepage-food.jpg'
-import HomepageFitness from '../../assets/homepage-fitness.jpg'
-import HomepageHealth from '../../assets/homepage-health.jpg'
+import HomepageFood from  '../../assets/images/homepage-food.jpg'
+import HomepageFitness from '../../assets/images/homepage-fitness.jpg'
+import HomepageHealth from '../../assets/images/homepage-health.jpg'
 
 
 function Homepage() {

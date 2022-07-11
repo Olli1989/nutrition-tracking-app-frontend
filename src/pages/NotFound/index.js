@@ -1,8 +1,14 @@
 import React from 'react'
 
+
+import FoodDiaryComp from '../../components/FoodDiaryComp'
+import Main from '../../layout/Main'
+
 function NotFound() {
   return (
-    <div>NotFound</div>
+    <Main>
+      <FoodDiaryComp />
+    </Main>
   )
 }
 
