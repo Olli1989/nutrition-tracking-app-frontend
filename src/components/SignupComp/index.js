@@ -19,7 +19,7 @@ const formDataInit = {
   username:'',
   weight:'70',
   height:'170',
-  age: 18,
+  age: '18',
   gender: 'w',
   activityLevel: 1.2,
   intenseSport: false,

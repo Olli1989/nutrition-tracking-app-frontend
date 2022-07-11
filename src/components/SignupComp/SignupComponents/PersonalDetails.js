@@ -1,5 +1,5 @@
 import React from 'react'
-import { Typography, TextField, InputAdornment,ListItemText, Box, FormControl, InputLabel, Select,MenuItem, ToggleButtonGroup, ToggleButton} from '@mui/material'
+import { Typography, TextField, Box, FormControl, InputLabel, Select,MenuItem, ToggleButtonGroup, ToggleButton} from '@mui/material'
 
 function getAgeArray () {
   let newArr = []
@@ -34,7 +34,10 @@ function getWeightArray () {
   return newArr
 }
 
+
+
 function PersonalDetails({handleChange, values}) {
+
 
   const ages = getAgeArray()
     .map((age, i) => {
@@ -49,7 +52,7 @@ function PersonalDetails({handleChange, values}) {
   const heights = getHeightArray()
     .map((heigth,i)=> {
       return <MenuItem value={heigth} key={heigth+''+i}>{heigth}</MenuItem>
-    })
+  })
 
 
   return (

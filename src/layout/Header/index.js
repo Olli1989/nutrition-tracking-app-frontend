@@ -32,7 +32,7 @@ export default function Header() {
 
   return (
     <header>
-      <AppBar position="static" color="success">
+      <AppBar position="static" color="primary">
         <Container maxWidth="xl">
           <Toolbar sx={{padding: 0}}>
             <Typography variant="h4" component="h1">
@@ -50,10 +50,10 @@ export default function Header() {
                 </>
               ):(
                 <>
-                  <Button component={Link} to={ROUTES.LOGIN} variant="outlined" sx={{mr:"1rem"}} color="primary">
+                  <Button component={Link} to={ROUTES.LOGIN} variant="outlined" sx={{mr:"1rem"}} color="secondary">
                     Login
                   </Button>
-                  <Button component={Link} to={ROUTES.SIGN_UP} variant="contained" color="primary">
+                  <Button component={Link} to={ROUTES.SIGN_UP} variant="contained" color="secondary">
                     Sign Up
                   </Button>
                 </>
