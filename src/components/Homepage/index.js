@@ -16,7 +16,7 @@ function Homepage() {
         <Grid item xs={6}>
           <img src={HomepageFood} alt="Healthy food" />
         </Grid>
-        <Grid item xs={6} sx={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
+        <Grid item xs={6} xxs={12} sx={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
           <Typography variant="h6" component="h3">
             Food
           </Typography>

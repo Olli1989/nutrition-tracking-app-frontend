@@ -10,8 +10,8 @@ import './dashboard.css'
 export default function Dashboard () {
   
 
-  //const { user } = useContext(UserContext)
-  const user ={}
+  const { user } = useContext(UserContext)
+  //const user ={}
  
 
   return (

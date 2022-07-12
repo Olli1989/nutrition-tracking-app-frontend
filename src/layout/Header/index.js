@@ -4,7 +4,7 @@ import { Link as BrowserLink } from 'react-router-dom'
 import UserContext from '../../context/UserContext'
 import * as ROUTES from '../../constants/routes'
 import './header.css'
-import Logo from '../../assets/images/logo2.png'
+import Logo from '../../assets/images/logo-olli.svg'
 
 import { 
   AppBar, 
@@ -38,7 +38,7 @@ export default function Header() {
         <Container maxWidth="xl">
           <Toolbar sx={{padding: 0}}>
             <Link component={BrowserLink} to={ROUTES.DASHBOARD}>
-              <img className="logo" src={Logo} alt="App Logo" />
+              <img src={Logo} alt="Logo link to front page" height="50px"/>
             </Link>
             <Box
               sx={{ml: "auto"}}
@@ -52,10 +52,10 @@ export default function Header() {
                 </>
               ):(
                 <>
-                  <Button component={Link} to={ROUTES.LOGIN} variant="outlined" sx={{mr:"1rem"}} color="secondary">
+                  <Button component={BrowserLink} to={ROUTES.LOGIN} variant="outlined" sx={{mr:"1rem"}} color="secondary">
                     Login
                   </Button>
-                  <Button component={Link} to={ROUTES.SIGN_UP} variant="contained" color="secondary">
+                  <Button component={BrowserLink} to={ROUTES.SIGN_UP} variant="contained" color="secondary">
                     Sign Up
                   </Button>
                 </>
