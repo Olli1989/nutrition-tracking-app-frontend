@@ -6,17 +6,39 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { Paper, InputBase, IconButton } from '@mui/material'
+import { Paper, InputBase, Box, IconButton, Typography } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search';
 
+import SingleFood from './SingleFood'
 
-function SearchFood({openDialog,setOpenDialog}) {
+function SearchFood({openDialog,setOpenDialog, date, addingCategory}) {
 
-  const [food,setFood] = useState("")
+  const [searchFood,setSearchFood] = useState("")
+  const [searchFoodArray, setSearchFoodArray] = useState("")
   const [isSearching, setIsSearching] = useState(false)
 
+  let searchElements = [...searchFoodArray].map((item,i) => {
+    return (
+      <Box
+        key={item + ' ' + i}
+        bgcolor="#777" 
+        sx={{
+          borderRadius: '5px',
+          p: 1, 
+          my: 1
+        }}
+      >
+        {
+          (item.nutriments['proteins_100g']) && <SingleFood date={date} addingCategory={addingCategory} productName={item['product_name_de']} nutriments={item.nutriments} />
+        }
+        
+
+      </Box>
+    )
+  })
+
   const handleFoodChange = (e) => {
-    setFood(e.target.value)
+    setSearchFood(e.target.value)
   }
 
   const handleFoodSearch = () => {
@@ -24,12 +46,12 @@ function SearchFood({openDialog,setOpenDialog}) {
   }
 
   useEffect(()=>{
-    let searchTerm = food.replaceAll(' ', '+')
+    let searchTerm = searchFood.replaceAll(' ', '+')
    
     async function searchFoodApi(){
       const response = await fetch(`https://de.openfoodfacts.org/cgi/search.pl?search_terms=${searchTerm}&action=process&json=true`)
       const data = await response.json()
-      console.log(data.products)
+      setSearchFoodArray(data.products)
     }
 
     if(isSearching){
@@ -38,6 +60,8 @@ function SearchFood({openDialog,setOpenDialog}) {
 
     setIsSearching(false)
   },[isSearching])
+
+  
 
   return (
     <Dialog open={openDialog} onClose={()=>setOpenDialog(false)}>
@@ -50,7 +74,7 @@ function SearchFood({openDialog,setOpenDialog}) {
               sx={{ ml: 1, flex: 1 }}
               placeholder="Search your food"
               inputProps={{ 'aria-label': 'search food' }}
-              value={food}
+              value={searchFood}
               onKeyDown={(e)=>{
                 if(e.key == 'Enter'){
                   handleFoodSearch()
@@ -63,6 +87,7 @@ function SearchFood({openDialog,setOpenDialog}) {
             </IconButton>
           </Paper>
 
+        {searchElements}
         </DialogContent>
         <DialogActions>
           <Button onClick={()=>setOpenDialog(false)}>Close</Button>

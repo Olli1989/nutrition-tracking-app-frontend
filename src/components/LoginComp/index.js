@@ -37,8 +37,9 @@ function LoginComp() {
       try {
         const { data } = await userApi.logIn({email: emailAddress, password: password.value })
         let userObject = jwt_decode(data.token)
+        console.log(data.result)
         setIsLogin(false)
-        setUser({token: data.token, email: userObject.email})
+        setUser({token: data.token, email: userObject.email, diary: data.result.diary})
   
       } catch (e){
         setServerError(e.response.data.message)
@@ -47,6 +48,8 @@ function LoginComp() {
       }
       
     }
+
+    //Get diary data from database
 
     if(isLogin){
       loginWithEmailAndPassword()

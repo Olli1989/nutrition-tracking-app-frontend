@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext} from 'react'
 import { Paper, Button, ButtonGroup, Box, Container, TextField, MenuItem, Divider, Grid} from '@mui/material'
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -16,6 +16,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
+import Usercontext from '../../context/UserContext'
 import SearchFood from './SearchFood'
 
 function getDateString(pickedDate){
@@ -51,9 +52,62 @@ function FoodDiaryComp() {
   const [openDatePicker, setOpenDatePicker] = useState(false)
   const [date, setDate] = useState(new Date());
   const [openDialog, setOpenDialog] = useState(false)
-  
+  const [addingCategory, setAddingCategory] = useState('')
+
+  const {user} = useContext(Usercontext)
+
   let pickedDate = getDateString(date)
 
+
+  let pickedDay = date.getUTCDate()
+  let pickedMonth = date.getUTCMonth()+1
+  let pickedYear = date.getUTCFullYear()
+  let todayDateFormated = `${pickedDay}.${pickedMonth}.${pickedYear}`
+  //console.log(todayDateFormated)
+  //console.log(user['diary'][todayDateFormated])
+
+  function getCategoryArray (categoryObj){
+    let renderArr = []
+    console.log(categoryObj)
+    for(let key in categoryObj){
+
+      
+      renderArr.push([key])
+    }
+    renderArr = renderArr.map((item,i) => {
+
+      return (
+        <Box
+          bgcolor="#777"
+          sx={{my: 1,p:1,borderRadius:'10px'}}
+          key={item + "" + i}
+        >
+          <Typography>{item}</Typography>
+          <Box>
+            <Typography variant="body2">
+              Amont: {categoryObj[item]['amount']}g
+            </Typography>
+            <Typography variant="body2">
+              Kcal: {categoryObj[item]['kcal']}
+            </Typography>
+            <Typography variant="body2">
+              Protein: {categoryObj[item]['protein']}
+            </Typography>
+            <Typography variant="body2">
+              Carb: {categoryObj[item]['carb']}
+            </Typography>
+            <Typography variant="body2">
+              Fat: {categoryObj[item]['fat']}
+            </Typography>
+          </Box>
+        </Box>
+      )
+    })
+
+    return renderArr
+
+    
+  }
 
 
   return (
@@ -109,8 +163,9 @@ function FoodDiaryComp() {
                     <Typography>Breakfast</Typography>
                   </AccordionSummary>
                   <AccordionDetails sx={{py:0}}>
+                  {user['diary'][todayDateFormated] ? getCategoryArray(user['diary'][todayDateFormated]['breakfast']) : <Typography>No food added!</Typography>}
                     <Divider />
-                    <Button sx={{pl:0}} onClick={()=>setOpenDialog(true)}>Add Food</Button>
+                    <Button sx={{pl:0}} onClick={()=>{setOpenDialog(true); setAddingCategory('breakfast')}}>Add Food</Button>
                   </AccordionDetails>
                 </Accordion>              
               </Grid>
@@ -124,8 +179,9 @@ function FoodDiaryComp() {
                     <Typography>Lunch</Typography>
                   </AccordionSummary>
                   <AccordionDetails sx={{py:0}}>
+                  {user['diary'][todayDateFormated] ? getCategoryArray(user['diary'][todayDateFormated]['lunch']) : <Typography>No food added!</Typography>}
                     <Divider />
-                    <Button sx={{pl:0}}>Add Food</Button>
+                    <Button sx={{pl:0}} onClick={()=>{setOpenDialog(true); setAddingCategory('lunch')}}>Add Food</Button>
                   </AccordionDetails>
                 </Accordion>              
               </Grid>
@@ -138,7 +194,8 @@ function FoodDiaryComp() {
                   >
                     <Typography>Dinner</Typography>
                   </AccordionSummary>
-                  <AccordionDetails sx={{py:0}}>
+                  <AccordionDetails sx={{py:0}} onClick={()=>{setOpenDialog(true); setAddingCategory('dinner')}}>
+                  {user['diary'][todayDateFormated] ? getCategoryArray(user['diary'][todayDateFormated]['dinner']) : <Typography>No food added!</Typography>}
                     <Divider />
                     <Button sx={{pl:0}}>Add Food</Button>
                   </AccordionDetails>
@@ -153,7 +210,8 @@ function FoodDiaryComp() {
                   >
                     <Typography>Snack</Typography>
                   </AccordionSummary>
-                  <AccordionDetails sx={{py:0}}>
+                  <AccordionDetails sx={{py:0}} onClick={()=>{setOpenDialog(true); setAddingCategory('snack')}}>
+                  {user['diary'][todayDateFormated] ? getCategoryArray(user['diary'][todayDateFormated]['snack']) : <Typography>No food added!</Typography>}
                     <Divider />
                     <Button sx={{pl:0}}>Add Food</Button>
                   </AccordionDetails>
@@ -199,7 +257,7 @@ function FoodDiaryComp() {
       </Grid>
     </Grid>
 
-    <SearchFood openDialog={openDialog} setOpenDialog={setOpenDialog}/>
+    <SearchFood openDialog={openDialog} setOpenDialog={setOpenDialog} date={todayDateFormated} addingCategory={addingCategory}/>
 
     </>
 

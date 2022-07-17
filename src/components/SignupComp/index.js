@@ -10,7 +10,8 @@ import SignupHeader from './SignupComponents/SignupHeader'
 import LeftRightButton from './SignupComponents/LeftRightButton'
 import SignupFooterText from './SignupComponents/SignupFooterText'
 import * as api from '../../api/authApi'
-import  UserContext from '../../context/UserContext'
+import UserContext from '../../context/UserContext'
+import DiaryContext from '../../context/DiaryContext'
 
 const formDataInit = {
   step: 1,
@@ -31,6 +32,7 @@ function Signup() {
   const REGEX_EMAIL_VALITY = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
 
   const { user, setUser } = useContext(UserContext)
+  const { diary, setDiary } = useContext(DiaryContext)
 
   const [formData, setFormData] = useState(formDataInit)
   const [errorMessageServer, setErrorMessageServer] = useState({status:'', message:''})
@@ -77,7 +79,7 @@ function Signup() {
         let userObject = jwt_decode(data.token)
         setIsSuccessfullySigned(true)
         setTimeout(()=>{
-          setUser({token: data.token, email: userObject.email})
+          setUser({token: data.token, email: userObject.email, diary: userObject.diary})
         },1500)
       } catch (e){
         setErrorMessageServer({status: e.response.request.status, message:  e.response.data.message})
