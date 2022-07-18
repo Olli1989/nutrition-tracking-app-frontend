@@ -36,9 +36,10 @@ function SingleFood({productName , nutriments, date, addingCategory}) {
     } else {
 
       let newDayDummy = {breakfast: {}, lunch: {}, dinner: {}, snack: {}}
-      let newDay = {...newDayDummy, [addingCategory]: {[productName]: {amount, kcal, protein, carb, fat}}}
+      newDayDummy[addingCategory] = {[productName]: {amount, kcal, protein, carb, fat}}
+    
       setUser(prevState => {
-        return {...prevState, ['diary']: {...prevState['diary'], [date]:{...prevState['diary'][date], [addingCategory]: newDay }}}
+        return {...prevState, ['diary']: {...prevState['diary'], [date]: newDayDummy}}
       })
     }
  

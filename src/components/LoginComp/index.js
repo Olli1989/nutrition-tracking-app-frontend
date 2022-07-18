@@ -49,7 +49,6 @@ function LoginComp() {
       
     }
 
-    //Get diary data from database
 
     if(isLogin){
       loginWithEmailAndPassword()

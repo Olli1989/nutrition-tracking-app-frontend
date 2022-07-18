@@ -15,6 +15,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import RemoveIcon from '@mui/icons-material/Remove';
 
 import Usercontext from '../../context/UserContext'
 import SearchFood from './SearchFood'
@@ -54,7 +55,7 @@ function FoodDiaryComp() {
   const [openDialog, setOpenDialog] = useState(false)
   const [addingCategory, setAddingCategory] = useState('')
 
-  const {user} = useContext(Usercontext)
+  const {user, setUser} = useContext(Usercontext)
 
   let pickedDate = getDateString(date)
 
@@ -66,7 +67,16 @@ function FoodDiaryComp() {
   //console.log(todayDateFormated)
   //console.log(user['diary'][todayDateFormated])
 
-  function getCategoryArray (categoryObj){
+  function handleRemoveItem(productName, category){
+    console.log("remove")
+    setUser(prevState => {
+      delete prevState['diary'][todayDateFormated][category][productName]
+      return {...prevState}
+    })
+    setOpenDialog(false)
+  }
+
+  function getCategoryArray (categoryObj, category){
     let renderArr = []
     console.log(categoryObj)
     for(let key in categoryObj){
@@ -82,6 +92,9 @@ function FoodDiaryComp() {
           sx={{my: 1,p:1,borderRadius:'10px'}}
           key={item + "" + i}
         >
+          <RemoveIcon 
+            onClick={()=>{handleRemoveItem(item, category)}}
+          />
           <Typography>{item}</Typography>
           <Box>
             <Typography variant="body2">
@@ -109,6 +122,14 @@ function FoodDiaryComp() {
     
   }
 
+  function addOrSubstrat1Day(addOrSubstract){
+    let newDate = new Date(date)
+    newDate.setDate(newDate.getDate()+addOrSubstract)
+    setDate(newDate)
+  }
+
+  
+
 
   return (
     <>
@@ -116,7 +137,7 @@ function FoodDiaryComp() {
       <Grid item xs={12}>
         <Box sx={{my: 2, display: 'flex', justifyContent: 'center'}}>
           <ButtonGroup variant="contained" aria-label="" >
-            <Button><ArrowBackIosNewIcon/></Button>
+            <Button><ArrowBackIosNewIcon onClick={()=>{addOrSubstrat1Day(-1)}}/></Button>
             <LocalizationProvider dateAdapter={AdapterMoment}>
               <DatePicker
                 open={openDatePicker}
@@ -138,7 +159,7 @@ function FoodDiaryComp() {
                 )}
               />
             </LocalizationProvider>
-            <Button><ArrowForwardIosIcon/></Button>
+            <Button><ArrowForwardIosIcon onClick={()=>{addOrSubstrat1Day(1)}}/></Button>
           </ButtonGroup>
         </Box>
 
@@ -163,7 +184,7 @@ function FoodDiaryComp() {
                     <Typography>Breakfast</Typography>
                   </AccordionSummary>
                   <AccordionDetails sx={{py:0}}>
-                  {user['diary'][todayDateFormated] ? getCategoryArray(user['diary'][todayDateFormated]['breakfast']) : <Typography>No food added!</Typography>}
+                  {user['diary'][todayDateFormated] ? getCategoryArray(user['diary'][todayDateFormated]['breakfast'], 'breakfast') : <Typography>No food added!</Typography>}
                     <Divider />
                     <Button sx={{pl:0}} onClick={()=>{setOpenDialog(true); setAddingCategory('breakfast')}}>Add Food</Button>
                   </AccordionDetails>
@@ -179,7 +200,7 @@ function FoodDiaryComp() {
                     <Typography>Lunch</Typography>
                   </AccordionSummary>
                   <AccordionDetails sx={{py:0}}>
-                  {user['diary'][todayDateFormated] ? getCategoryArray(user['diary'][todayDateFormated]['lunch']) : <Typography>No food added!</Typography>}
+                  {user['diary'][todayDateFormated] ? getCategoryArray(user['diary'][todayDateFormated]['lunch'], 'lunch') : <Typography>No food added!</Typography>}
                     <Divider />
                     <Button sx={{pl:0}} onClick={()=>{setOpenDialog(true); setAddingCategory('lunch')}}>Add Food</Button>
                   </AccordionDetails>
@@ -195,7 +216,7 @@ function FoodDiaryComp() {
                     <Typography>Dinner</Typography>
                   </AccordionSummary>
                   <AccordionDetails sx={{py:0}} onClick={()=>{setOpenDialog(true); setAddingCategory('dinner')}}>
-                  {user['diary'][todayDateFormated] ? getCategoryArray(user['diary'][todayDateFormated]['dinner']) : <Typography>No food added!</Typography>}
+                  {user['diary'][todayDateFormated] ? getCategoryArray(user['diary'][todayDateFormated]['dinner'],  'dinner') : <Typography>No food added!</Typography>}
                     <Divider />
                     <Button sx={{pl:0}}>Add Food</Button>
                   </AccordionDetails>
@@ -211,7 +232,7 @@ function FoodDiaryComp() {
                     <Typography>Snack</Typography>
                   </AccordionSummary>
                   <AccordionDetails sx={{py:0}} onClick={()=>{setOpenDialog(true); setAddingCategory('snack')}}>
-                  {user['diary'][todayDateFormated] ? getCategoryArray(user['diary'][todayDateFormated]['snack']) : <Typography>No food added!</Typography>}
+                  {user['diary'][todayDateFormated] ? getCategoryArray(user['diary'][todayDateFormated]['snack'], 'snack') : <Typography>No food added!</Typography>}
                     <Divider />
                     <Button sx={{pl:0}}>Add Food</Button>
                   </AccordionDetails>
