@@ -170,39 +170,3 @@ export default function Header() {
   )
 }
 
-/*
-      <AppBar position="static" color="primary">
-        <Container maxWidth="xl">
-          <Toolbar sx={{padding: 0}}>
-            <Link component={BrowserLink} to={ROUTES.DASHBOARD}>
-              <img src={Logo} alt="Logo link to front page" height="50px"/>
-            </Link>
-            <Box
-              sx={{ml: "auto"}}
-            >
-            {
-              user ? (
-                <>
-                  <Button variant="outlined" color="secondary" onClick={logOut}>
-                    Log Out
-                  </Button>
-                </>
-              ):(
-                <>
-                  <Button component={BrowserLink} to={ROUTES.LOGIN} variant="outlined" sx={{mr:"1rem"}} color="secondary">
-                    Login
-                  </Button>
-                  <Button component={BrowserLink} to={ROUTES.SIGN_UP} variant="contained" color="secondary">
-                    Sign Up
-                  </Button>
-                </>
-              )
-            }
-            
-              
-            </Box>
-          </Toolbar>
-
-        </Container>
-      </AppBar>
-*/

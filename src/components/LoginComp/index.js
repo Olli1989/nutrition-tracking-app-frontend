@@ -39,7 +39,7 @@ function LoginComp() {
         let userObject = jwt_decode(data.token)
         console.log(data.result)
         setIsLogin(false)
-        setUser({token: data.token, email: userObject.email, diary: data.result.diary})
+        setUser({token: data.token, email: userObject.email, diary: data.result.diary, personalData:data.result.personalData})
   
       } catch (e){
         setServerError(e.response.data.message)

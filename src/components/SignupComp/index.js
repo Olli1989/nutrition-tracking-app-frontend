@@ -74,8 +74,9 @@ function Signup() {
   useEffect(()=>{
     async function signupBackend () {
       try {
-        console.log(formData.username, formData.email, formData.password)
-        const { data } = await api.signUp({username: formData.username, email: formData.email, password: formData.password })
+
+        let personalData = {weight: formData.weight, height: formData.height, age: formData.age, gender: formData.gender, intenseSport: formData.intenseSport, activity: formData.activityLevel}
+        const { data } = await api.signUp({username: formData.username, email: formData.email, password: formData.password, personalData })
         let userObject = jwt_decode(data.token)
         setIsSuccessfullySigned(true)
         setTimeout(()=>{

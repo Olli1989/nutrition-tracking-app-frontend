@@ -16,6 +16,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import RemoveIcon from '@mui/icons-material/Remove';
+import * as api from '../../api/authApi'
 
 import Usercontext from '../../context/UserContext'
 import SearchFood from './SearchFood'
@@ -54,6 +55,7 @@ function FoodDiaryComp() {
   const [date, setDate] = useState(new Date());
   const [openDialog, setOpenDialog] = useState(false)
   const [addingCategory, setAddingCategory] = useState('')
+  const [saveData, setSaveData] = useState(false)
 
   const {user, setUser} = useContext(Usercontext)
 
@@ -78,7 +80,7 @@ function FoodDiaryComp() {
 
   function getCategoryArray (categoryObj, category){
     let renderArr = []
-    console.log(categoryObj)
+
     for(let key in categoryObj){
 
       
@@ -122,12 +124,33 @@ function FoodDiaryComp() {
     
   }
 
-  function addOrSubstrat1Day(addOrSubstract){
+  const addOrSubstrat1Day = (addOrSubstract) => {
     let newDate = new Date(date)
     newDate.setDate(newDate.getDate()+addOrSubstract)
     setDate(newDate)
   }
 
+  const handleSaveData = () => {
+    setSaveData(true)
+  }
+
+  useEffect(()=>{
+    async function saveFoodData () {
+      try {
+        const { data } = await api.saveData({email: user.email, diary: user.diary})
+        console.log(data)
+
+      } catch (e){
+        console.log(e)
+
+      }
+      setSaveData(false)    
+    }
+    
+    if(saveData){
+      saveFoodData()
+    }
+  }, [saveData])
   
 
 
@@ -166,7 +189,13 @@ function FoodDiaryComp() {
       </Grid>
     </Grid>
 
-    
+    <Grid container>
+      <Grid item>
+        <Button onClick={handleSaveData}>
+          Save Data
+        </Button>
+      </Grid>
+    </Grid>
 
 
     
