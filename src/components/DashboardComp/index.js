@@ -7,6 +7,7 @@ import calcCalorieRequiement from '../../services/helper-func/calcMetabolism'
 import calcBMI, { bmiTable } from '../../services/helper-func/calcBmi'
 import RecommendedCalorie from '../utility/RecommendedCalorie'
 import getFormatedDate from '../../services/helper-func/getFormatedDate'
+import RecommendedCalorieChart from '../../components/utility/RecommendedCalorieChart'
 
 function DashboardComp() {
 
@@ -21,11 +22,19 @@ function DashboardComp() {
   const ResponsiveGridLayout = WidthProvider(Responsive)
 
   const layout = [
-    { i: "first", x:0, y:0, w:1, h:1 , maxH:3 },
-    { i: "second", x:1, y:0, w:1, h:1 , maxH:3 },
+    { i: "first", x:4, y:0, w:1, h:2 , maxH:3 },
+    { i: "second", x:1, y:0, w:1, h:2 , maxH:3 },
     { i: "third", x:2, y:0, w:1, h:2, minH: 2 , maxH:3 },
-    { i: "fourth", x:3, y:0, w:1, h:2 , minH: 2, maxH:3 },
-    { i: "fifth", x:4, y:0, w:1, h:1 , maxH:3 },
+    { i: "fourth", x:0, y:2, w:1, h:2 , minH: 2, maxH:3 },
+    { i: "fifth", x:0, y:0, w:1, h:4 , minH:4, maxH:3 },
+  ] 
+
+  const layoutsm = [
+    { i: "first", x:1, y:2, w:1, h:2 , maxH:3 },
+    { i: "second", x:1, y:2, w:1, h:2 , maxH:3 },
+    { i: "third", x:1, y:0, w:1, h:2, minH: 2 , maxH:3 },
+    { i: "fourth", x:0, y:4, w:1, h:2 , minH: 2, maxH:3 },
+    { i: "fifth", x:0, y:0, w:1, h:4 , minH:4, maxH:3 },
   ] 
 
   useEffect(()=>{
@@ -38,9 +47,9 @@ function DashboardComp() {
   return (
     <div>
       <ResponsiveGridLayout
-        layouts={{lg: layout}}
+        layouts={{lg: layout, sm: layoutsm}}
         breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-        cols={{ lg: 3, md: 3, sm: 2, xs: 2, xxs: 1 }}
+        cols={{ lg: 3, md: 3, sm: 2, xs: 1, xxs: 1 }}
         rowHeight={100}
         width={1000}
         compactType={'horizontal'}
@@ -80,7 +89,7 @@ function DashboardComp() {
         <div key="fifth" className="item">
          <Box sx={{display: 'flex',justifyContent: 'center', alignItems: 'center', height: '100%', p:1}}>
             <div>
-              <Typography variant="h6" component="h2" sx={{textAlign: 'center'}}>Playing Block</Typography>
+              <RecommendedCalorieChart metabolism={calcCalorieRequiement(user.personalData)} date={getFormatedDate(new Date())}/>
             </div>
           </Box> 
         </div>
