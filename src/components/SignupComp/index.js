@@ -76,11 +76,11 @@ function Signup() {
       try {
 
         let personalData = {weight: formData.weight, height: formData.height, age: formData.age, gender: formData.gender, intenseSport: formData.intenseSport, activity: formData.activityLevel}
-        const { data } = await api.signUp({username: formData.username, email: formData.email, password: formData.password, personalData })
+        const { data } = await api.signUp({username: formData.username, email: formData.email, password: formData.password, diary: {default: 0}, personalData })
         let userObject = jwt_decode(data.token)
         setIsSuccessfullySigned(true)
         setTimeout(()=>{
-          setUser({token: data.token, email: userObject.email, diary: userObject.diary})
+          setUser({token: data.token, email: userObject.email, diary: userObject.diary, personalData})
         },1500)
       } catch (e){
         setErrorMessageServer({status: e.response.request.status, message:  e.response.data.message})

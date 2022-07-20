@@ -36,7 +36,7 @@ function App() {
               </UserLoggedIn>
             }/>
             <Route path={ROUTES.FOODDIARY} element={
-              <ProtectedRoute user={user} redirectPath={ROUTES.LOGIN}>
+              <ProtectedRoute user={user} redirectPath={ROUTES.DASHBOARD}>
                 <FoodDiary/>
               </ProtectedRoute>
             } />

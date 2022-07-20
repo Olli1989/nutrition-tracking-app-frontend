@@ -97,7 +97,7 @@ export default function Header() {
               user ? (
                 <Box sx={{ml: 'auto'}}>
                   <MenuItem onClick={handleCloseNavMenu}>
-                    <Button component={BrowserLink} to={'/sfsf'} variant="outlined" color="secondary">
+                    <Button component={BrowserLink} to={ROUTES.FOODDIARY} variant="outlined" color="secondary">
                       Food Diary
                     </Button>
                   </MenuItem>
@@ -133,7 +133,7 @@ export default function Header() {
               <img src={Logo} alt="Logo link to front page" height="40px"/>
             </Link>
           <Box sx={{ flexGrow: 1,  display: { xs: 'none', sm: 'flex' } }}>
-            <Button component={BrowserLink} to={'/sfsf'} variant="outlined" color="secondary" sx={{ ml: 5}}>
+            <Button component={BrowserLink} to={ROUTES.FOODDIARY} variant="outlined" color="secondary" sx={{ ml: 5}}>
               Food Diary
             </Button>
           </Box>

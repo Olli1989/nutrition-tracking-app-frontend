@@ -80,7 +80,7 @@ function LoginComp() {
 
         <Button variant="outlined" color='secondary' onClick={handleLogin} sx={{mb: 1.5, p: 1}} disabled={isInputValid?true:false}>Log In</Button>
       </Box>
-      
+      {serverError && <Typography color="error">{serverError}</Typography>}
       <Typography>
         Do you do not have an account yet?<br /> Better be quick and start your journey today -{' '}
         <Button component={Link} to={ROUTES.SIGN_UP} color="secondary">

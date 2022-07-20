@@ -18,8 +18,11 @@ import DialogTitle from '@mui/material/DialogTitle';
 import RemoveIcon from '@mui/icons-material/Remove';
 import * as api from '../../api/authApi'
 
+import calcCalorieRequiement from '../../services/helper-func/calcMetabolism'
 import Usercontext from '../../context/UserContext'
 import SearchFood from './SearchFood'
+import RecommendedCalorie from '../utility/RecommendedCalorie'
+import getFormatedDate from '../../services/helper-func/getFormatedDate'
 
 function getDateString(pickedDate){
 
@@ -48,24 +51,24 @@ function getDateString(pickedDate){
 
 
 function FoodDiaryComp() {
+  const {user, setUser} = useContext(Usercontext)
 
-  const [weightValue, setWeightValue] = useState('')
-  const [sleepQuality, setSleepQuality] = useState(3)
+  const [weightValue, setWeightValue] = useState(user.personalData.weightValue || 70)
+  const [sleepQuality, setSleepQuality] = useState(0)
   const [openDatePicker, setOpenDatePicker] = useState(false)
   const [date, setDate] = useState(new Date());
   const [openDialog, setOpenDialog] = useState(false)
   const [addingCategory, setAddingCategory] = useState('')
   const [saveData, setSaveData] = useState(false)
 
-  const {user, setUser} = useContext(Usercontext)
 
   let pickedDate = getDateString(date)
 
 
-  let pickedDay = date.getUTCDate()
+  /*let pickedDay = date.getUTCDate()
   let pickedMonth = date.getUTCMonth()+1
-  let pickedYear = date.getUTCFullYear()
-  let todayDateFormated = `${pickedDay}.${pickedMonth}.${pickedYear}`
+  let pickedYear = date.getUTCFullYear()*/
+  let todayDateFormated = getFormatedDate(date)
   //console.log(todayDateFormated)
   //console.log(user['diary'][todayDateFormated])
 
@@ -138,7 +141,6 @@ function FoodDiaryComp() {
     async function saveFoodData () {
       try {
         const { data } = await api.saveData({email: user.email, diary: user.diary})
-        console.log(data)
 
       } catch (e){
         console.log(e)
@@ -152,6 +154,19 @@ function FoodDiaryComp() {
     }
   }, [saveData])
   
+  const handleWeightChange = (e) => {
+    setWeightValue(e.target.value)
+    setUser(prevState => {
+      return {...prevState, ['diary']: {...prevState['diary'], [todayDateFormated]:{...prevState['diary'][todayDateFormated], weight: e.target.value }}}
+    })
+  } 
+
+  const handleSleepQualityChange = (e) => {
+    setSleepQuality(e.target.value)
+    setUser(prevState => {
+      return {...prevState, ['diary']: {...prevState['diary'], [todayDateFormated]:{...prevState['diary'][todayDateFormated], sleepQuality: e.target.value }}}
+    })
+  }
 
 
   return (
@@ -285,21 +300,32 @@ function FoodDiaryComp() {
               label="Weight Today"
               type="number"
               value={weightValue}
-              onChange={(e)=>{setWeightValue(e.target.value)}}
+              onChange={(e)=>{handleWeightChange(e)}}
               />
             <TextField
               sx={{width: '100%'}}
               select
               label="Sleeping Quality"
               value={sleepQuality}
-              onChange={(e) => {setSleepQuality(e.target.value)}}
+              onChange={(e) => {handleSleepQualityChange(e)}}
             >
+              <MenuItem value={0} disabled>
+                <em>Select the value</em>
+              </MenuItem>
               <MenuItem key={1} value={1}>&#129321; Very good sleep</MenuItem>
               <MenuItem key={2} value={2}>&#128516; Good sleep</MenuItem>
               <MenuItem key={3} value={3}>&#128528; OK sleep</MenuItem>
               <MenuItem key={4} value={4}>&#128532; Bad sleep</MenuItem>
               <MenuItem key={5} value={5}>&#128555; Very bad sleep</MenuItem>
             </TextField>
+  
+          </Box>
+          </Paper>
+
+          <Paper elevation={1}  sx={{ px: 1, py: 2, mt: 3}}>
+          <Box>
+            <Typography variant="h6" component="h2">Recommended Calorie Intake</Typography>
+            <RecommendedCalorie metabolism={calcCalorieRequiement(user.personalData)} date={todayDateFormated}/>
   
           </Box>
           </Paper>

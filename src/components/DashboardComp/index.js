@@ -1,78 +1,39 @@
-import { fontWeight } from '@mui/system'
 import React, { useEffect, useState, useContext } from 'react'
 import { Responsive, WidthProvider } from 'react-grid-layout'
+import { Typography, Box } from '@mui/material'
 
 import UserContext from '../../context/UserContext'
+import calcCalorieRequiement from '../../services/helper-func/calcMetabolism'
+import calcBMI, { bmiTable } from '../../services/helper-func/calcBmi'
+import RecommendedCalorie from '../utility/RecommendedCalorie'
+import getFormatedDate from '../../services/helper-func/getFormatedDate'
 
 function DashboardComp() {
 
   const {user} = useContext(UserContext)
 
   const [isGrapping, setIsGrapping] = useState(false)
+  const [metabolism, setMetabolism] = useState(calcCalorieRequiement(user.personalData))
+  const [bmi, setBmi] = useState(calcBMI(user.personalData.weight, user.personalData.height))
+  const [bmiTableText, setBmiTableText] = useState(bmiTable(user.personalData.weight, user.personalData.height))
+  const [quote, setQuote] = useState()
 
   const ResponsiveGridLayout = WidthProvider(Responsive)
 
   const layout = [
-    { i: "first", x:0, y:0, w:1, h:1 },
-    { i: "second", x:1, y:0, w:1, h:1 },
-    { i: "third", x:2, y:0, w:1, h:1 },
-    { i: "fourth", x:3, y:0, w:1, h:1 },
-    { i: "fifth", x:4, y:0, w:1, h:1 },
-  ]
+    { i: "first", x:0, y:0, w:1, h:1 , maxH:3 },
+    { i: "second", x:1, y:0, w:1, h:1 , maxH:3 },
+    { i: "third", x:2, y:0, w:1, h:2, minH: 2 , maxH:3 },
+    { i: "fourth", x:3, y:0, w:1, h:2 , minH: 2, maxH:3 },
+    { i: "fifth", x:4, y:0, w:1, h:1 , maxH:3 },
+  ] 
 
-  console.log(user.personalData)
+  useEffect(()=>{
+    fetch('https://goquotes-api.herokuapp.com/api/v1/random?count=1')
+      .then(response => response.json())
+      .then(data => setQuote(data.quotes[0].text))
+  })
 
-  const calcCalorieRequiement = () => {
-    let baseMetabolism = 0
-   /* let weight = user.personalData.weight
-    let height = user.personalData.height
-    let age = user.personalData.age
-    let intenseSport = user.personalData.intenseSport
-    let gender = user.personalData.gender
-    let activity = user.personalData.activity*/
-
-    let weight = 120
-    let height = 170
-    let age = 30
-    let intenseSport = user.personalData.intenseSport
-    let gender = 'm'
-    let activity = user.personalData.activity
-
-    let brocaIndex = 0
-    let bmi = weight / (height/100 * height/100)
-    console.log(bmi)
-    if(bmi > 30){
-      weight = 0.75 * (height-100) + 0.25 * weight
-      console.log(weight)
-    }
-
-
-    if(gender === "w"){
-      baseMetabolism = (655.1 + (9.56 * weight) + (1.85 * height) - (4.7 * age) )
-
-    } else {
-      baseMetabolism = (66.5 + (13.75 * weight) + (5.0 * height) - (6.76 * age) )
-    }
-
-    console.log(baseMetabolism)
-    
-
-    if(intenseSport){
-      activity += 0.3
-    }
-
-    let activationMetabolism = baseMetabolism * activity
-    console.log(activationMetabolism)
-
-    let totalMetabolicRate = baseMetabolism + activationMetabolism
-
-    console.log(totalMetabolicRate)
-
-  }
-
-  calcCalorieRequiement()
-
- 
 
   return (
     <div>
@@ -85,29 +46,43 @@ function DashboardComp() {
         compactType={'horizontal'}
       >
         <div key="first" className="item">
-          <div>
-              first
-          </div>
+            <Box sx={{display: 'flex',justifyContent: 'center', alignItems: 'center', height: '100%'}}>
+              <div>
+                <Typography>Lose weight: <b>{metabolism-300} kcal</b></Typography>
+                <Typography>Maintain weight:  <b>{metabolism} kcal</b></Typography>
+                <Typography>Gain weight:  <b>{metabolism+300} kcal</b></Typography>
+              </div>
+            </Box>          
         </div>
         <div key="second" className="item">
-          <div>
-              second
-          </div>
+            <Box sx={{display: 'flex',justifyContent: 'center', alignItems: 'center', height: '100%'}}>
+              <div>
+                <Typography>Your BMI: <b>{bmi}</b> ({bmiTableText})</Typography>
+              </div>
+            </Box>   
         </div>
         <div key="third" className="item">
-          <div>
-              third
-          </div>
+            <Box sx={{display: 'flex',justifyContent: 'center', alignItems: 'center', height: '100%'}}>
+              <div>
+                <Typography variant="h6" component="h2">Today's calorie intake</Typography>
+                <RecommendedCalorie metabolism={calcCalorieRequiement(user.personalData)} date={getFormatedDate(new Date())}/>
+              </div>
+            </Box> 
         </div>
         <div key="fourth" className="item">
-          <div>
-              fourth
-          </div>
+          <Box sx={{display: 'flex',justifyContent: 'center', alignItems: 'center', height: '100%', p:1}}>
+            <div>
+              <Typography variant="h6" component="h2" sx={{textAlign: 'center'}}>Today's Quote</Typography>
+              <Typography sx={{textAlign: 'center'}}>{quote}</Typography>
+            </div>
+          </Box> 
         </div>
         <div key="fifth" className="item">
-          <div>
-              fifth
-          </div>
+         <Box sx={{display: 'flex',justifyContent: 'center', alignItems: 'center', height: '100%', p:1}}>
+            <div>
+              <Typography variant="h6" component="h2" sx={{textAlign: 'center'}}>Playing Block</Typography>
+            </div>
+          </Box> 
         </div>
 
       </ResponsiveGridLayout>
