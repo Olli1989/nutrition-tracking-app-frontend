@@ -4,13 +4,12 @@ import { Link as BrowserLink } from 'react-router-dom'
 import UserContext from '../../context/UserContext'
 import * as ROUTES from '../../constants/routes'
 import './header.css'
-import Logo from '../../assets/images/logo-olli.svg'
+import Logo from '../../assets/images/logo-olli-white.svg'
 
 import { 
   AppBar, 
   Container,
   Toolbar,
-  Typography,
   Button,
   Box,
   Link
@@ -20,10 +19,7 @@ import {
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
-import Avatar from '@mui/material/Avatar';
-import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 
 
 export default function Header() {
@@ -31,21 +27,13 @@ export default function Header() {
   const {user , setUser} = useContext(UserContext)
 
   const [anchorElNav, setAnchorElNav] = useState(null);
-  const [anchorElUser, setAnchorElUser] = useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
   };
   
   const logOut = () => {
@@ -133,9 +121,11 @@ export default function Header() {
               <img src={Logo} alt="Logo link to front page" height="40px"/>
             </Link>
           <Box sx={{ flexGrow: 1,  display: { xs: 'none', sm: 'flex' } }}>
-            <Button component={BrowserLink} to={ROUTES.FOODDIARY} variant="outlined" color="secondary" sx={{ ml: 5}}>
-              Food Diary
-            </Button>
+            {user && 
+              <Button component={BrowserLink} to={ROUTES.FOODDIARY} variant="outlined" color="secondary" sx={{ ml: 5}}>
+                Food Diary
+              </Button>
+            }
           </Box>
 
           <Box sx={{ flexGrow: 0, display: { xs: 'none', sm: 'flex' } }}>

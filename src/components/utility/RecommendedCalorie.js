@@ -7,7 +7,7 @@ import UserContext from '../../context/UserContext'
 function RecommendedCalorie({metabolism, date}) {
   const {user} = useContext(UserContext)
   let weight = user.personalData.weight
-  let suggestedProtein = (weight*1.2) * 4.1
+  let suggestedProtein = (weight*2) * 4.1
   let suggestedFat = (weight) * 9.1
   let suggestedCarb = metabolism - (suggestedProtein + suggestedFat)
   const [eatenKcal, setEatenKcal] = useState(0.0)
@@ -19,12 +19,12 @@ function RecommendedCalorie({metabolism, date}) {
   useEffect(()=>{
     let kcal =0, protein=0, carb=0, fat=0
     for(let category in user['diary'][date]){
-      if(category != 'weight' && category != 'sleepQuality'){
+      if(category !== 'weight' && category !== 'sleepQuality'){
         for(let food in user['diary'][date][category]) {
-          kcal += parseFloat(user['diary'][date][category][food]['kcal'])
-          protein += parseFloat(user['diary'][date][category][food]['protein'])
-          carb += parseFloat(user['diary'][date][category][food]['carb'])
-          fat += parseFloat(user['diary'][date][category][food]['fat'])
+          kcal += Math.ceil(parseFloat(user['diary'][date][category][food]['kcal']))
+          protein += Math.ceil(parseFloat(user['diary'][date][category][food]['protein']))
+          carb += Math.ceil(parseFloat(user['diary'][date][category][food]['carb']))
+          fat += Math.ceil(parseFloat(user['diary'][date][category][food]['fat']))
         }
         
       }

@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import EditIcon from '@mui/icons-material/Edit';
 import { DatePicker } from '@mui/x-date-pickers'
 import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment'
@@ -23,6 +24,7 @@ import Usercontext from '../../context/UserContext'
 import SearchFood from './SearchFood'
 import RecommendedCalorie from '../utility/RecommendedCalorie'
 import getFormatedDate from '../../services/helper-func/getFormatedDate'
+import EditFood from './EditFood'
 
 function getDateString(pickedDate){
 
@@ -58,8 +60,16 @@ function FoodDiaryComp() {
   const [openDatePicker, setOpenDatePicker] = useState(false)
   const [date, setDate] = useState(new Date());
   const [openDialog, setOpenDialog] = useState(false)
+  const [openEditFoodDialog, setOpenEditFoodDialog] = useState(false)
   const [addingCategory, setAddingCategory] = useState('')
   const [saveData, setSaveData] = useState(false)
+  const [editFood, setEditFood] = useState("")
+  const [editCategoryFood, setEditCategoryFood] = useState("")
+  const [expanded, setExpanded] = React.useState(false);
+
+  const handleChange = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  }
 
 
   let pickedDate = getDateString(date)
@@ -89,21 +99,27 @@ function FoodDiaryComp() {
       
       renderArr.push([key])
     }
+
     renderArr = renderArr.map((item,i) => {
 
       return (
+        
         <Box
           bgcolor="#777"
           sx={{my: 1,p:1,borderRadius:'10px'}}
           key={item + "" + i}
-        >
-          <RemoveIcon 
-            onClick={()=>{handleRemoveItem(item, category)}}
-          />
+        > 
+          <Button onClick={()=>{handleRemoveItem(item, category)}}>
+            <RemoveIcon />
+          </Button>
+          <Button onClick={()=>{setEditFood(item);setOpenEditFoodDialog(true);setEditCategoryFood(category)}} >
+            <EditIcon />
+          </Button>
+          
           <Typography>{item}</Typography>
           <Box>
             <Typography variant="body2">
-              Amont: {categoryObj[item]['amount']}g
+              Amount: {categoryObj[item]['amount']}g
             </Typography>
             <Typography variant="body2">
               Kcal: {categoryObj[item]['kcal']}
@@ -119,6 +135,8 @@ function FoodDiaryComp() {
             </Typography>
           </Box>
         </Box>
+        
+      
       )
     })
 
@@ -126,6 +144,9 @@ function FoodDiaryComp() {
 
     
   }
+
+
+  
 
   const addOrSubstrat1Day = (addOrSubstract) => {
     let newDate = new Date(date)
@@ -175,7 +196,7 @@ function FoodDiaryComp() {
       <Grid item xs={12}>
         <Box sx={{my: 2, display: 'flex', justifyContent: 'center'}}>
           <ButtonGroup variant="contained" aria-label="" >
-            <Button><ArrowBackIosNewIcon onClick={()=>{addOrSubstrat1Day(-1)}}/></Button>
+            <Button color="secondary"><ArrowBackIosNewIcon onClick={()=>{addOrSubstrat1Day(-1)}}/></Button>
             <LocalizationProvider dateAdapter={AdapterMoment}>
               <DatePicker
                 open={openDatePicker}
@@ -190,6 +211,7 @@ function FoodDiaryComp() {
                         sx={{width: '200px'}}
                         ref={inputRef} {...inputProps}
                         onClick={() => setOpenDatePicker(isOpen => !isOpen)}
+                        color="secondary"
                       >
                         {pickedDate}
                       </Button>
@@ -197,16 +219,16 @@ function FoodDiaryComp() {
                 )}
               />
             </LocalizationProvider>
-            <Button><ArrowForwardIosIcon onClick={()=>{addOrSubstrat1Day(1)}}/></Button>
+            <Button color="secondary"><ArrowForwardIosIcon onClick={()=>{addOrSubstrat1Day(1)}}/></Button>
           </ButtonGroup>
         </Box>
 
       </Grid>
     </Grid>
 
-    <Grid container>
-      <Grid item>
-        <Button onClick={handleSaveData}>
+    <Grid container justifyContent="center" >
+      <Grid item sx={{mb: 2}}>
+        <Button onClick={handleSaveData} variant="contained" color="secondary">
           Save Data
         </Button>
       </Grid>
@@ -220,7 +242,7 @@ function FoodDiaryComp() {
           <Paper elevation={1}  sx={{px: 1, py: 2}}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
-                <Accordion >
+                <Accordion expanded={expanded === 'breakfast'} onChange={handleChange('breakfast')}>
                   <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="Breakfast-content"
@@ -230,13 +252,13 @@ function FoodDiaryComp() {
                   <AccordionDetails sx={{py:0}}>
                   {user['diary'][todayDateFormated] ? getCategoryArray(user['diary'][todayDateFormated]['breakfast'], 'breakfast') : <Typography>No food added!</Typography>}
                     <Divider />
-                    <Button sx={{pl:0}} onClick={()=>{setOpenDialog(true); setAddingCategory('breakfast')}}>Add Food</Button>
+                    <Button sx={{pl:0}} onClick={()=>{setOpenDialog(true); setAddingCategory('breakfast')}} color="secondary">Add Food</Button>
                   </AccordionDetails>
                 </Accordion>              
               </Grid>
 
               <Grid item xs={12} sm={6}>
-                <Accordion >
+                <Accordion expanded={expanded === 'lunch'} onChange={handleChange('lunch')}>
                   <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="Lunch-content"
@@ -246,39 +268,39 @@ function FoodDiaryComp() {
                   <AccordionDetails sx={{py:0}}>
                   {user['diary'][todayDateFormated] ? getCategoryArray(user['diary'][todayDateFormated]['lunch'], 'lunch') : <Typography>No food added!</Typography>}
                     <Divider />
-                    <Button sx={{pl:0}} onClick={()=>{setOpenDialog(true); setAddingCategory('lunch')}}>Add Food</Button>
+                    <Button sx={{pl:0}} onClick={()=>{setOpenDialog(true); setAddingCategory('lunch')}} color="secondary">Add Food</Button>
                   </AccordionDetails>
                 </Accordion>              
               </Grid>
 
               <Grid item xs={12} sm={6}>
-                <Accordion >
+                <Accordion expanded={expanded === 'dinner'} onChange={handleChange('dinner')}>
                   <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="Dinner-content"
                   >
                     <Typography>Dinner</Typography>
                   </AccordionSummary>
-                  <AccordionDetails sx={{py:0}} onClick={()=>{setOpenDialog(true); setAddingCategory('dinner')}}>
+                  <AccordionDetails sx={{py:0}}>
                   {user['diary'][todayDateFormated] ? getCategoryArray(user['diary'][todayDateFormated]['dinner'],  'dinner') : <Typography>No food added!</Typography>}
                     <Divider />
-                    <Button sx={{pl:0}}>Add Food</Button>
+                    <Button sx={{pl:0}}  onClick={()=>{setOpenDialog(true); setAddingCategory('dinner')}} color="secondary">Add Food</Button>
                   </AccordionDetails>
                 </Accordion>               
               </Grid>
 
               <Grid item xs={12} sm={6}>
-                <Accordion >
+                <Accordion expanded={expanded === 'snack'} onChange={handleChange('snack')}>
                   <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="Snack-content"
                   >
                     <Typography>Snack</Typography>
                   </AccordionSummary>
-                  <AccordionDetails sx={{py:0}} onClick={()=>{setOpenDialog(true); setAddingCategory('snack')}}>
+                  <AccordionDetails sx={{py:0}} >
                   {user['diary'][todayDateFormated] ? getCategoryArray(user['diary'][todayDateFormated]['snack'], 'snack') : <Typography>No food added!</Typography>}
                     <Divider />
-                    <Button sx={{pl:0}}>Add Food</Button>
+                    <Button sx={{pl:0}} onClick={()=>{setOpenDialog(true); setAddingCategory('snack')}} color="secondary">Add Food</Button>
                   </AccordionDetails>
                 </Accordion>              
               </Grid>
@@ -334,7 +356,7 @@ function FoodDiaryComp() {
     </Grid>
 
     <SearchFood openDialog={openDialog} setOpenDialog={setOpenDialog} date={todayDateFormated} addingCategory={addingCategory}/>
-
+    {openEditFoodDialog && <EditFood open={openEditFoodDialog} setOpenEditFoodDialog={setOpenEditFoodDialog} editFood={editFood} date={todayDateFormated} addingCategory={editCategoryFood}/>}
     </>
 
   )

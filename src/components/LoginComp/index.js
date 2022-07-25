@@ -71,9 +71,9 @@ function LoginComp() {
       
       <Box sx={{display:'flex', flexDirection:'column'}}>
         {errorMessageEmail ? 
-          <TextField error id="outlined-error-helper-text" defaultValue="Hello World" sx={{mb: 1.5}} value={emailAddress} onChange={({target})=>{setEmailAddress(target.value); setErrorMessageEmail("")}} helperText={errorMessageEmail} label="Error" InputLabelProps={{ shrink: true }}/>
+          <TextField errorsx={{mb: 1.5}} value={emailAddress} onChange={({target})=>{setEmailAddress(target.value); setErrorMessageEmail("")}} helperText={errorMessageEmail} label="Error" InputLabelProps={{ shrink: true }}/>
           :
-          <TextField id="outlined-basic" label="E-Mail" variant="outlined" color='secondary' sx={{mb: 1.5}} value={emailAddress} onChange={({target})=>setEmailAddress(target.value)}/>
+          <TextField  label="E-Mail" variant="outlined" color='info' sx={{mb: 1.5}} value={emailAddress} onChange={({target})=>setEmailAddress(target.value)}/>
         }
         
         <PasswordInput password={password} setPassword={setPassword}/>

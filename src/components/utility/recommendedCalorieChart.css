@@ -24,5 +24,10 @@
 .chartStatus,
 .chartValue {
   font-weight: bold;
+  z-index: 100;
+}
+
+.calorieSurplus {
+  color: red;
 }
 

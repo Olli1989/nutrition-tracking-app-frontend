@@ -29,10 +29,6 @@ img {
 
 /*--- Dashboard Drag and Drop ---*/
 
-.item {
-  background-color: green;
-}
-
 .item:hover {
   cursor:move; 
   cursor:-webkit-grab; 

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { AppBar, Toolbar, Typography, Container } from '@mui/material'
+import { AppBar, Toolbar, Typography, Container, Button, Grid } from '@mui/material'
 import './footer.css'
 
 function Footer() {
@@ -9,10 +9,23 @@ function Footer() {
       <AppBar position="static" xs={{marginTop: "auto"}}>
         <Container maxWidth="xl">
           <Toolbar>
-            <Typography>
-              &copy; Olli
-            </Typography>
-          </Toolbar>
+            <Grid container justifyContent="space-between" alignItems="center">
+              <Grid item>
+                <Button color="secondary" sx={{pl: 0}}>
+                  Impressum
+                </Button>
+                <Button color="secondary">
+                  Datenschutz
+                </Button>
+              </Grid>
+              <Grid item>
+                <Typography  color="secondary">
+                  copyright &copy; Olli
+                </Typography>
+
+              </Grid>
+            </Grid>
+            </Toolbar>  
         </Container>
       </AppBar>
     </footer>

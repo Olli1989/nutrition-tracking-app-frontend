@@ -9,6 +9,7 @@ import RecommendedCalorie from '../utility/RecommendedCalorie'
 import getFormatedDate from '../../services/helper-func/getFormatedDate'
 import RecommendedCalorieChart from '../../components/utility/RecommendedCalorieChart'
 
+
 function DashboardComp() {
 
   const {user} = useContext(UserContext)
@@ -26,7 +27,7 @@ function DashboardComp() {
     { i: "second", x:1, y:0, w:1, h:2 , maxH:3 },
     { i: "third", x:2, y:0, w:1, h:2, minH: 2 , maxH:3 },
     { i: "fourth", x:0, y:2, w:1, h:2 , minH: 2, maxH:3 },
-    { i: "fifth", x:0, y:0, w:1, h:4 , minH:4, maxH:3 },
+    { i: "fifth", x:0, y:0, w:1, h:4 , minH:4, maxH:4},
   ] 
 
   const layoutsm = [
@@ -34,14 +35,24 @@ function DashboardComp() {
     { i: "second", x:1, y:2, w:1, h:2 , maxH:3 },
     { i: "third", x:1, y:0, w:1, h:2, minH: 2 , maxH:3 },
     { i: "fourth", x:0, y:4, w:1, h:2 , minH: 2, maxH:3 },
-    { i: "fifth", x:0, y:0, w:1, h:4 , minH:4, maxH:3 },
+    { i: "fifth", x:0, y:0, w:1, h:4 , minH:4, maxH:4 },
   ] 
 
   useEffect(()=>{
-    fetch('https://goquotes-api.herokuapp.com/api/v1/random?count=1')
-      .then(response => response.json())
-      .then(data => setQuote(data.quotes[0].text))
-  })
+    async function getQuote (){
+      try{
+
+
+        let response = await fetch('https://goquotes-api.herokuapp.com/api/v1/random?count=1')
+        let data = await response.json()
+        setQuote(data.quotes[0].text)
+      } catch(e){
+        setQuote("If you think lifting is dangerous, try being weak. Being weak is dangerous.")
+      }
+    }
+
+    getQuote()
+  },[])
 
 
   return (
@@ -55,7 +66,7 @@ function DashboardComp() {
         compactType={'horizontal'}
       >
         <div key="first" className="item">
-            <Box sx={{display: 'flex',justifyContent: 'center', alignItems: 'center', height: '100%'}}>
+            <Box sx={{display: 'flex',justifyContent: 'center', alignItems: 'center', height: '100%'}} bgcolor="rgba(237,237,237,1)">
               <div>
                 <Typography>Lose weight: <b>{metabolism-300} kcal</b></Typography>
                 <Typography>Maintain weight:  <b>{metabolism} kcal</b></Typography>
@@ -64,14 +75,14 @@ function DashboardComp() {
             </Box>          
         </div>
         <div key="second" className="item">
-            <Box sx={{display: 'flex',justifyContent: 'center', alignItems: 'center', height: '100%'}}>
+            <Box sx={{display: 'flex',justifyContent: 'center', alignItems: 'center', height: '100%'}} bgcolor="rgba(237,237,237,1)">
               <div>
                 <Typography>Your BMI: <b>{bmi}</b> ({bmiTableText})</Typography>
               </div>
             </Box>   
         </div>
         <div key="third" className="item">
-            <Box sx={{display: 'flex',justifyContent: 'center', alignItems: 'center', height: '100%'}}>
+            <Box sx={{display: 'flex',justifyContent: 'center', alignItems: 'center', height: '100%'}} bgcolor="rgba(237,237,237,1)">
               <div>
                 <Typography variant="h6" component="h2">Today's calorie intake</Typography>
                 <RecommendedCalorie metabolism={calcCalorieRequiement(user.personalData)} date={getFormatedDate(new Date())}/>
@@ -79,7 +90,7 @@ function DashboardComp() {
             </Box> 
         </div>
         <div key="fourth" className="item">
-          <Box sx={{display: 'flex',justifyContent: 'center', alignItems: 'center', height: '100%', p:1}}>
+          <Box sx={{display: 'flex',justifyContent: 'center', alignItems: 'center', height: '100%', p:1}} bgcolor="rgba(237,237,237,1)">
             <div>
               <Typography variant="h6" component="h2" sx={{textAlign: 'center'}}>Today's Quote</Typography>
               <Typography sx={{textAlign: 'center'}}>{quote}</Typography>
@@ -87,7 +98,7 @@ function DashboardComp() {
           </Box> 
         </div>
         <div key="fifth" className="item">
-         <Box sx={{display: 'flex',justifyContent: 'center', alignItems: 'center', height: '100%', p:1}}>
+         <Box sx={{display: 'flex',justifyContent: 'center', alignItems: 'center', height: '100%', p:1}} >
             <div>
               <RecommendedCalorieChart metabolism={calcCalorieRequiement(user.personalData)} date={getFormatedDate(new Date())}/>
             </div>

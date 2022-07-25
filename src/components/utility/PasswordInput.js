@@ -22,18 +22,20 @@ export default function PasswordInput ({password, setPassword}){
 
     return (
         <FormControl variant="outlined" sx={{mb: 1}}>
-            <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+            <InputLabel  color="info" htmlFor="outlined-adornment-password">Password</InputLabel>
             <OutlinedInput
                 id="outlined-adornment-password"
                 type={password.showPassword ? 'text' : 'password'}
                 value={password.value}
                 onChange={({target})=>setPassword(prevState => ({...prevState, value: target.value}))}
+                color="info"
                 endAdornment={
                 <InputAdornment position="end">
                     <IconButton
                     aria-label="toggle password visibility"
                     onClick={handleClickShowPassword}
                     onMouseDown={handleMouseDownPassword}
+                    
                     edge="end"
                     >
                     {password.showPassword ? <VisibilityOff /> : <Visibility />}
@@ -41,6 +43,7 @@ export default function PasswordInput ({password, setPassword}){
                 </InputAdornment>
                 }
                 label="Password"
+               
             />
         </FormControl>
 
