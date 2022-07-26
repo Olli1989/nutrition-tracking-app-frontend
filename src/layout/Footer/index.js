@@ -15,7 +15,7 @@ function Footer() {
                   Impressum
                 </Button>
                 <Button color="secondary">
-                  Datenschutz
+                  Data Privacy
                 </Button>
               </Grid>
               <Grid item>

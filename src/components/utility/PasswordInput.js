@@ -22,13 +22,13 @@ export default function PasswordInput ({password, setPassword}){
 
     return (
         <FormControl variant="outlined" sx={{mb: 1}}>
-            <InputLabel  color="info" htmlFor="outlined-adornment-password">Password</InputLabel>
+            <InputLabel  color="secondary" htmlFor="outlined-adornment-password">Password</InputLabel>
             <OutlinedInput
                 id="outlined-adornment-password"
                 type={password.showPassword ? 'text' : 'password'}
                 value={password.value}
                 onChange={({target})=>setPassword(prevState => ({...prevState, value: target.value}))}
-                color="info"
+                color="secondary"
                 endAdornment={
                 <InputAdornment position="end">
                     <IconButton

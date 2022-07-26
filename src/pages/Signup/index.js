@@ -7,12 +7,15 @@ import './signup.css'
 function SignUp() {
   return (
     <main>
-      <Box sx={{
-        minHeight: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center'
-      }}>
+      <Box 
+        sx={{
+          minHeight: '100vh',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}
+        bgcolor="primary.main"
+      >
         <SignupComp />
       </Box>
     </main>

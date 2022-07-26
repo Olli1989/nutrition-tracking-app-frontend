@@ -15,6 +15,7 @@ function Login() {
           justifyContent: 'center',
           alignItems: 'center'
         }}
+        bgcolor="primary.main"
       >
         <LoginComp />
       </Box>

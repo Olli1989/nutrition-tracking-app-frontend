@@ -24,7 +24,14 @@ img {
   width:125px
 }
 
+.cursor {
+  cursor: pointer;
+}
 
+.cursor:hover,
+.curso:focus  {
+  background-color: #90BF3D;
+}
 
 
 /*--- Dashboard Drag and Drop ---*/

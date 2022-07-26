@@ -1,5 +1,5 @@
 import React from 'react'
-import { Typography, TextField, Box, FormControl, InputLabel, Select,MenuItem, ToggleButtonGroup, ToggleButton} from '@mui/material'
+import { Typography, TextField, Box, FormControl, InputLabel, Select,MenuItem, ToggleButtonGroup, ToggleButton, NativeSelect} from '@mui/material'
 
 function getAgeArray () {
   let newArr = []
@@ -41,17 +41,17 @@ function PersonalDetails({handleChange, values}) {
 
   const ages = getAgeArray()
     .map((age, i) => {
-      return <MenuItem value={age} key={age+''+i}>{age}</MenuItem>
+      return <option value={age} key={age+''+i}>{age}</option>
     })
 
   const weights = getWeightArray()
     .map((weight,i)=> {
-      return <MenuItem value={weight} key={weight+''+i}>{weight}</MenuItem>
+      return <option value={weight} key={weight+''+i}>{weight}</option>
     })
 
   const heights = getHeightArray()
     .map((heigth,i)=> {
-      return <MenuItem value={heigth} key={heigth+''+i}>{heigth}</MenuItem>
+      return <option value={heigth} key={heigth+''+i}>{heigth}</option>
   })
 
 
@@ -61,22 +61,32 @@ function PersonalDetails({handleChange, values}) {
         Personal Details
       </Typography>
       <Box sx={{display: 'flex', gap: 1, mb: 1.5}}>
+
         <TextField
           fullWidth
-          value={values.weight}
-          onChange={({target})=>{handleChange(target.value,'weight')}}
+          color="secondary"
           select
           label="Weight in kg"
+          value={values.weight}
+          onChange={({target})=>{handleChange(target.value,'weight')}}
+          SelectProps={{
+            native: true,
+          }}
         >
           {weights}
         </TextField>
 
+
         <TextField
           fullWidth
-          value={values.height}
-          onChange={({target})=>{handleChange(target.value,'height')}}
+          color="secondary"
           select
           label="Height in cm"
+          value={values.height}
+          onChange={({target})=>{handleChange(target.value,'height')}}
+          SelectProps={{
+            native: true,
+          }}
         >
           {heights}
         </TextField>
@@ -84,18 +94,22 @@ function PersonalDetails({handleChange, values}) {
 
 
       <Box sx={{display: 'flex', gap: 1, mb: 1.5}}>
-        <FormControl sx={{width: '100px'}}>
-          <InputLabel>Age</InputLabel>
-          <Select
-            value={values.age}
-            label="Age"
-            onChange={({target})=>{handleChange(target.value,'age')}}
-          >
-            {ages}
-          </Select>
-        </FormControl>
+
+        <TextField
+          sx={{width: '100px'}} 
+          color="secondary"
+          select
+          label="Age"
+          value={values.age}
+          onChange={({target})=>{handleChange(target.value,'age')}}
+          SelectProps={{
+            native: true,
+          }}
+        >
+          {ages}
+        </TextField>
         
-        <FormControl sx={{width: '100%'}}>
+        <FormControl sx={{width: '100%'}} color="secondary">
           <InputLabel>Activity Level</InputLabel>
           <Select
             value={values.activityLevel}
@@ -107,8 +121,11 @@ function PersonalDetails({handleChange, values}) {
             <MenuItem value={1.165}>Sitzend, gehend und stehend</MenuItem>
             <MenuItem value={1.85}>Vorwiegend stehend/gehend</MenuItem>
             <MenuItem value={2.2}>Anstrengende Arbeit/Sport</MenuItem>
+            
           </Select>
         </FormControl>
+
+        
 
         
       </Box>
@@ -128,6 +145,8 @@ function PersonalDetails({handleChange, values}) {
             name="gender" 
             exclusive={true} 
             fullWidth
+            color="secondary"
+            variant="contained"
           >   
             <ToggleButton  value="w">Woman</ToggleButton>
             <ToggleButton  value="m">Man  </ToggleButton>  
@@ -139,6 +158,7 @@ function PersonalDetails({handleChange, values}) {
             name="intensity" 
             exclusive={true} 
             fullWidth
+            color="secondary"
           >
               <ToggleButton aria-pressed="true" value={true}>Ja</ToggleButton>
               <ToggleButton aria-pressed="false" value={false}>Nein</ToggleButton>

@@ -18,22 +18,23 @@ function SearchFood({openDialog,setOpenDialog, date, addingCategory}) {
   const [isSearching, setIsSearching] = useState(false)
 
   let searchElements = [...searchFoodArray].map((item,i) => {
-    return (
-      <Box
-        key={item + ' ' + i}
-        bgcolor="#777" 
-        sx={{
-          borderRadius: '5px',
-          p: 1, 
-          my: 1
-        }}
-      >
-        {
-          (item.nutriments['proteins_100g']) && <SingleFood date={date} addingCategory={addingCategory} productName={item['product_name_de']} nutriments={item.nutriments} />
-        }
-        
 
-      </Box>
+    return (
+      (
+        (item?.nutriments['proteins_100g'] !== undefined) && 
+        <Box
+          key={item + ' ' + i}
+          bgcolor="#777" 
+          className="cursor"
+          sx={{
+            borderRadius: '5px',
+            p: 1, 
+            my: 1
+          }}
+        >
+          <SingleFood date={date} addingCategory={addingCategory} productName={item['product_name_de']} nutriments={item.nutriments} />
+        </Box>
+      )
     )
   })
 
@@ -68,7 +69,7 @@ function SearchFood({openDialog,setOpenDialog, date, addingCategory}) {
         <DialogTitle>Search for food</DialogTitle>
         <DialogContent>          
           <Paper
-            sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400}}
+            sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: '100%'}}
           >
             <InputBase
               sx={{ ml: 1, flex: 1 }}

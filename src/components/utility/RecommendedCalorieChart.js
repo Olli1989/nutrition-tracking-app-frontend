@@ -68,7 +68,7 @@ function RecommendedCalorie({metabolism, date}) {
     fatHigher = true;
   }
 
-  let carbLeft = (suggestedCarb/4.1-eatenCarb)
+  let carbLeft = (suggestedCarb-eatenCarb)
   let carbHigher = false
   if(carbLeft<0){
     carbLeft = 0;

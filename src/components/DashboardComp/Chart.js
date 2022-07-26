@@ -16,10 +16,7 @@ function Chart() {
 
         callbacks: {
           label: (data) => {
-            let label = 'Eaten: ' + data.dataset.data[0] + 'g, Left: ' + data.dataset.data[1] + 'g'
-            console.log(data.dataset)
-
-      
+            let label = 'Eaten: ' + data.dataset.data[0] + 'g, Left: ' + data.dataset.data[1] + 'g'   
             return label;
           }
         }

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import { createPortal } from 'react-dom'
 
 
-import { Box, Paper, Typography, IconButton, TextField, InputAdornment } from '@mui/material'
+import { Box, Paper, Typography, IconButton, TextField, InputAdornment, Button } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit';
 import CloseIcon from '@mui/icons-material/Close';
 import UserContext from '../../context/UserContext'
@@ -50,10 +50,10 @@ function EditFood({open, setOpenEditFoodDialog, editFood, date, addingCategory})
     open ?
       createPortal(
         <Box 
-            sx={{minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems:'center', backgroundColo: 'red', position: 'fixed', top: 0, left: 0, right: 0, p: 1, zIndex:10000}}
+            sx={{minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems:'center', backgroundColor: 'rgba(0,0,0,.5)', position: 'fixed', top: 0, left: 0, right: 0, p: 3, zIndex:10000}}
         >
             <Paper
-                sx={{display: 'flex', justifyContent: 'center', alignItems:'center', position: 'relative', top: 4, left: 4, backgroundColor: 'rgb(209, 209, 209)', height: '80vh', p:2}}
+                sx={{display: 'flex', justifyContent: 'center', alignItems:'center', position: 'relative',  backgroundColor: 'rgb(209, 209, 209)', minWidth:'30vw', minHeight: '50vh', p:2}}
             >
               <IconButton
                 sx={{position: 'absolute', top: 1, right: 1}}
@@ -63,7 +63,7 @@ function EditFood({open, setOpenEditFoodDialog, editFood, date, addingCategory})
               </IconButton>
               <Box sx={{display: 'flex', flexDirection: 'column'}}>
 
-              <Typography>{}</Typography>
+              <Typography variant="h6" component="h2" >{editFood}</Typography>
 
               <Box
                 sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'column'}}
@@ -76,23 +76,26 @@ function EditFood({open, setOpenEditFoodDialog, editFood, date, addingCategory})
                     InputProps={{
                       endAdornment: <InputAdornment position="end">g</InputAdornment>,
                     }}
-                    sx={{width: '150px'}}
+                    sx={{my: 1}}
                     />
 
                   
 
                     </Box>
               <Box
-                sx={{display: 'flex'}}
+                sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}
                 >
-                
-                <Typography>KCAL: {parseFloat(kcal*amount).toFixed(2)} </Typography>
-                <Typography>Protein: {parseFloat(protein*amount).toFixed(2)} </Typography>
-                <Typography>Carbs: {parseFloat(carb*amount).toFixed(2)} </Typography>
-                <Typography>Fats: {parseFloat(fat*amount).toFixed(2)} </Typography>
+                <Box>
+                  <Typography>KCAL: {parseFloat(kcal*amount).toFixed(2)} </Typography>
+                  <Typography>Protein: {parseFloat(protein*amount).toFixed(2)} </Typography>
+                  <Typography>Carbs: {parseFloat(carb*amount).toFixed(2)} </Typography>
+                  <Typography>Fats: {parseFloat(fat*amount).toFixed(2)} </Typography>
+                </Box>
+                <Button onClick={() => {setIsEditing(true)}}>
+                  <EditIcon />
+                </Button>
               </Box>
-              <EditIcon onClick={() => {setIsEditing(true)}}/>
-                  </Box>
+            </Box>
             </Paper>
         </Box>
         

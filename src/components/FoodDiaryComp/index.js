@@ -11,18 +11,16 @@ import EditIcon from '@mui/icons-material/Edit';
 import { DatePicker } from '@mui/x-date-pickers'
 import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment'
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
 import RemoveIcon from '@mui/icons-material/Remove';
-import * as api from '../../api/authApi'
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
+import * as api from '../../api/authApi'
 import calcCalorieRequiement from '../../services/helper-func/calcMetabolism'
 import Usercontext from '../../context/UserContext'
 import SearchFood from './SearchFood'
 import RecommendedCalorie from '../utility/RecommendedCalorie'
+import RecommendedCalorieChart from '../utility/RecommendedCalorieChart'
 import getFormatedDate from '../../services/helper-func/getFormatedDate'
 import EditFood from './EditFood'
 
@@ -74,16 +72,10 @@ function FoodDiaryComp() {
 
   let pickedDate = getDateString(date)
 
-
-  /*let pickedDay = date.getUTCDate()
-  let pickedMonth = date.getUTCMonth()+1
-  let pickedYear = date.getUTCFullYear()*/
   let todayDateFormated = getFormatedDate(date)
-  //console.log(todayDateFormated)
-  //console.log(user['diary'][todayDateFormated])
+
 
   function handleRemoveItem(productName, category){
-    console.log("remove")
     setUser(prevState => {
       delete prevState['diary'][todayDateFormated][category][productName]
       return {...prevState}
@@ -109,14 +101,17 @@ function FoodDiaryComp() {
           sx={{my: 1,p:1,borderRadius:'10px'}}
           key={item + "" + i}
         > 
-          <Button onClick={()=>{handleRemoveItem(item, category)}}>
-            <RemoveIcon />
-          </Button>
-          <Button onClick={()=>{setEditFood(item);setOpenEditFoodDialog(true);setEditCategoryFood(category)}} >
-            <EditIcon />
-          </Button>
+          <Box sx={{display: 'flex', justifyContent: 'space-between'}}>
+
+            <Button onClick={()=>{handleRemoveItem(item, category)}}>
+              <RemoveIcon />
+            </Button>
+            <Button onClick={()=>{setEditFood(item);setOpenEditFoodDialog(true);setEditCategoryFood(category)}} >
+              <EditIcon />
+            </Button>
+            </Box>
           
-          <Typography>{item}</Typography>
+          <Typography><strong>{item}</strong></Typography>
           <Box>
             <Typography variant="body2">
               Amount: {categoryObj[item]['amount']}g
@@ -141,7 +136,6 @@ function FoodDiaryComp() {
     })
 
     return renderArr
-
     
   }
 
@@ -151,7 +145,7 @@ function FoodDiaryComp() {
   const addOrSubstrat1Day = (addOrSubstract) => {
     let newDate = new Date(date)
     newDate.setDate(newDate.getDate()+addOrSubstract)
-    setDate(newDate)
+    setDate(newDate)  
   }
 
   const handleSaveData = () => {
@@ -162,6 +156,7 @@ function FoodDiaryComp() {
     async function saveFoodData () {
       try {
         const { data } = await api.saveData({email: user.email, diary: user.diary})
+        setOpenAlert(true);
 
       } catch (e){
         console.log(e)
@@ -189,6 +184,26 @@ function FoodDiaryComp() {
     })
   }
 
+  //Toast Snackbar for successfully update MongoDB
+
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+
+  const [openAlert, setOpenAlert] = useState(false);
+
+  const handleClick = () => {
+    setOpenAlert(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpenAlert(false);
+  };
+
 
   return (
     <>
@@ -196,7 +211,7 @@ function FoodDiaryComp() {
       <Grid item xs={12}>
         <Box sx={{my: 2, display: 'flex', justifyContent: 'center'}}>
           <ButtonGroup variant="contained" aria-label="" >
-            <Button color="secondary"><ArrowBackIosNewIcon onClick={()=>{addOrSubstrat1Day(-1)}}/></Button>
+            <Button color="secondary" onClick={()=>{addOrSubstrat1Day(-1)}}><ArrowBackIosNewIcon /></Button>
             <LocalizationProvider dateAdapter={AdapterMoment}>
               <DatePicker
                 open={openDatePicker}
@@ -219,7 +234,7 @@ function FoodDiaryComp() {
                 )}
               />
             </LocalizationProvider>
-            <Button color="secondary"><ArrowForwardIosIcon onClick={()=>{addOrSubstrat1Day(1)}}/></Button>
+            <Button color="secondary" onClick={()=>{addOrSubstrat1Day(1)}}><ArrowForwardIosIcon /></Button>
           </ButtonGroup>
         </Box>
 
@@ -313,8 +328,14 @@ function FoodDiaryComp() {
       <Grid item xs={12} md={6} order={{md: 2, xs: 1}}>
       <Box sx={{width: '100%'}}>
         
+        <Paper elevation={1}  sx={{ px: 1, py: 2, mb: 3}}>
+          <Box sx={{position: 'relative', zIndex: 100}}>
+            <RecommendedCalorieChart metabolism={calcCalorieRequiement(user.personalData)} date={todayDateFormated}/>
+  
+          </Box>
+        </Paper>
 
-        <Paper elevation={1}  sx={{ px: 1, py: 2}}>
+        <Paper elevation={1}  sx={{ px: 1, py: 2, mb: 3}}>
           <Box sx={{display: 'flex', gap: 1}}>
   
             <TextField
@@ -344,19 +365,29 @@ function FoodDiaryComp() {
           </Box>
           </Paper>
 
-          <Paper elevation={1}  sx={{ px: 1, py: 2, mt: 3}}>
+          <Paper elevation={1}  sx={{ px: 1, py: 2, mb: 3}}>
           <Box>
             <Typography variant="h6" component="h2">Recommended Calorie Intake</Typography>
             <RecommendedCalorie metabolism={calcCalorieRequiement(user.personalData)} date={todayDateFormated}/>
   
           </Box>
           </Paper>
+          
+
+          
         </Box>        
       </Grid>
     </Grid>
 
-    <SearchFood openDialog={openDialog} setOpenDialog={setOpenDialog} date={todayDateFormated} addingCategory={addingCategory}/>
-    {openEditFoodDialog && <EditFood open={openEditFoodDialog} setOpenEditFoodDialog={setOpenEditFoodDialog} editFood={editFood} date={todayDateFormated} addingCategory={editCategoryFood}/>}
+      <SearchFood openDialog={openDialog} setOpenDialog={setOpenDialog} date={todayDateFormated} addingCategory={addingCategory}/>
+      {openEditFoodDialog && <EditFood open={openEditFoodDialog} setOpenEditFoodDialog={setOpenEditFoodDialog} editFood={editFood} date={todayDateFormated} addingCategory={editCategoryFood}/>}
+      
+      <Snackbar open={openAlert} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="info" sx={{ width: '100%' }}>
+          Successfully Updated!
+        </Alert>
+      </Snackbar>
+    
     </>
 
   )

@@ -32,7 +32,6 @@ function Signup() {
   const REGEX_EMAIL_VALITY = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
 
   const { user, setUser } = useContext(UserContext)
-  const { diary, setDiary } = useContext(DiaryContext)
 
   const [formData, setFormData] = useState(formDataInit)
   const [errorMessageServer, setErrorMessageServer] = useState({status:'', message:''})
@@ -95,23 +94,6 @@ function Signup() {
   }, [isSignup])
 
   useEffect(()=>{
-
-    async function dashboardSettingsBackend() {
-      try {
-        //dashboard settings backend
-        //await api.signUp({username: formData.username, email: formData.email, password: formData.password })
-      } catch (e){
-        console.log(e)
-      }
-    }
-
-    if(isSuccessfullySigned){
-      dashboardSettingsBackend()
-    }
-
-  },[isSuccessfullySigned])
-
-  useEffect(()=>{
     if(user != null) {
       localStorage.setItem('user', JSON.stringify(user))
     }
@@ -167,7 +149,7 @@ function Signup() {
     {
       !isSuccessfullySigned ? 
       (
-        <Paper elevation={3} sx={{p:2, maxWidth:'400px', width: '100%'}} >
+        <Paper elevation={3} sx={{p:4, maxWidth:'400px', width: '100%'}} >
           <Typography variant='h4' component='h2' sx={{mb: 2, textAlign:'center'}}>
             Sign Up
           </Typography>

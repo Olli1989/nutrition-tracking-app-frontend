@@ -37,13 +37,11 @@ function LoginComp() {
       try {
         const { data } = await userApi.logIn({email: emailAddress, password: password.value })
         let userObject = jwt_decode(data.token)
-        console.log(data.result)
         setIsLogin(false)
         setUser({token: data.token, email: userObject.email, diary: data.result.diary, personalData:data.result.personalData})
   
       } catch (e){
         setServerError(e.response.data.message)
-        console.log(e.response.data.message)
         setIsLogin(false)
       }
       
@@ -64,16 +62,16 @@ function LoginComp() {
   },[user])
 
   return (
-    <Paper elevation={3} sx={{p:2, maxWidth:'400px'}} >
+    <Paper elevation={3} sx={{py:4, px:2, maxWidth:'400px'}} >
       <Typography variant='h4' component='h2' sx={{mb: 2, textAlign:'center'}}>
         Login to Member Area
       </Typography>
       
       <Box sx={{display:'flex', flexDirection:'column'}}>
         {errorMessageEmail ? 
-          <TextField errorsx={{mb: 1.5}} value={emailAddress} onChange={({target})=>{setEmailAddress(target.value); setErrorMessageEmail("")}} helperText={errorMessageEmail} label="Error" InputLabelProps={{ shrink: true }}/>
+          <TextField error sx={{mb: 1.5}} value={emailAddress} onChange={({target})=>{setEmailAddress(target.value); setErrorMessageEmail("")}} helperText={errorMessageEmail} label="Error" InputLabelProps={{ shrink: true }}/>
           :
-          <TextField  label="E-Mail" variant="outlined" color='info' sx={{mb: 1.5}} value={emailAddress} onChange={({target})=>setEmailAddress(target.value)}/>
+          <TextField  label="E-Mail" variant="outlined" color='secondary' sx={{mb: 1.5}} value={emailAddress} onChange={({target})=>setEmailAddress(target.value)}/>
         }
         
         <PasswordInput password={password} setPassword={setPassword}/>

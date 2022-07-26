@@ -6,8 +6,6 @@ import AddingFood from './AddingFood';
 
 function SingleFood({productName , nutriments, date, addingCategory}) {
 
-  
-
   const [amount, setAmount] = useState(1)
   const [kcal, setKcal] = useState(0)
   const [protein, setProtein] = useState(0)
@@ -20,30 +18,23 @@ function SingleFood({productName , nutriments, date, addingCategory}) {
 
   return (
     <>
-    <Box onClick={()=>setOpenSingleFoodDialog(true)}>
-    
-      <Typography>{productName}</Typography>
-
-      <Box
-        sx={{display: 'flex'}}
-        >
+    {productName && 
+      <Box onClick={()=>setOpenSingleFoodDialog(true)} >
+        <Typography sx={{color: '#fff'}}><strong>{productName}</strong></Typography>
         
-        <Typography>KCAL: {kcal} </Typography>
-        <Typography>Protein: {protein} </Typography>
-        <Typography>Carbs: {carb} </Typography>
-        <Typography>Fats: {fat} </Typography>
       </Box>
-    </Box>
 
-    <AddingFood 
-      open={openSingleFoodDialog} 
-      onClose={() => setOpenSingleFoodDialog(false)} 
-      productName = {productName}
-      nutriments = {nutriments}
-      date = {date}
-      addingCategory = {addingCategory}
-    />
-
+    }
+    {openSingleFoodDialog && 
+      <AddingFood 
+        open={openSingleFoodDialog} 
+        onClose={() => setOpenSingleFoodDialog(false)} 
+        productName = {productName}
+        nutriments = {nutriments}
+        date = {date}
+        addingCategory = {addingCategory}
+      />
+    }
     </>
   )
 }

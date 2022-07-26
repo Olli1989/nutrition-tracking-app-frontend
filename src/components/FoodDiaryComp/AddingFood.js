@@ -1,14 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { createPortal } from 'react-dom'
 
-import { Box, Paper, Typography, IconButton, TextField, InputAdornment } from '@mui/material'
+import { Box, Paper, Typography, IconButton, TextField, InputAdornment, Button } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import UserContext from '../../context/UserContext'
 
 
 function AddingFood({open, onClose, productName, nutriments, date, addingCategory}) {
-  console.log(nutriments)
 
   const {user, setUser} = useContext(UserContext)
 
@@ -69,20 +68,20 @@ function AddingFood({open, onClose, productName, nutriments, date, addingCategor
     open ?
       createPortal(
         <Box 
-            sx={{minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems:'center', backgroundColo: 'red', position: 'fixed', top: 0, left: 0, right: 0, p: 1, zIndex:10000}}
+            sx={{minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems:'center', backgroundColor: 'rgba(0,0,0,.5)', position: 'fixed', top: 0, left: 0, right: 0, p: 3, zIndex:10000}}
         >
             <Paper
-                sx={{display: 'flex', justifyContent: 'center', alignItems:'center', position: 'relative', top: 4, left: 4, backgroundColor: 'rgb(209, 209, 209)', height: '80vh', p:2}}
+                sx={{display: 'flex', justifyContent: 'center', alignItems:'center', position: 'relative',  backgroundColor: 'rgb(209, 209, 209)', minWidth:'30vw', minHeight: '50vh', p:2}}
             >
               <IconButton
                 sx={{position: 'absolute', top: 1, right: 1}}
-                onClick = {onClose}
+                onClick = {()=>{onClose(false)}}
               >
                 <CloseIcon/>
               </IconButton>
               <Box sx={{display: 'flex', flexDirection: 'column'}}>
 
-              <Typography>{productName}</Typography>
+              <Typography variant="h6" component="h2" >{productName}</Typography>
 
               <Box
                 sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'column'}}
@@ -95,23 +94,26 @@ function AddingFood({open, onClose, productName, nutriments, date, addingCategor
                     InputProps={{
                       endAdornment: <InputAdornment position="end">g</InputAdornment>,
                     }}
-                    sx={{width: '150px'}}
+                    sx={{my: 1}}
                     />
 
                   
 
                     </Box>
               <Box
-                sx={{display: 'flex'}}
+                sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}
                 >
-                
-                <Typography>KCAL: {kcal} </Typography>
-                <Typography>Protein: {protein} </Typography>
-                <Typography>Carbs: {carb} </Typography>
-                <Typography>Fats: {fat} </Typography>
+                <Box>
+                  <Typography>KCAL: {parseFloat(kcal).toFixed(2)} </Typography>
+                  <Typography>Protein: {parseFloat(protein).toFixed(2)} </Typography>
+                  <Typography>Carbs: {parseFloat(carb).toFixed(2)} </Typography>
+                  <Typography>Fats: {parseFloat(fat).toFixed(2)} </Typography>
+                </Box>
+                <Button onClick={handleAddingFood}>
+                  <AddCircleIcon />
+                </Button>
               </Box>
-              <AddCircleIcon onClick={handleAddingFood}/>
-                  </Box>
+            </Box>
             </Paper>
         </Box>
         
@@ -122,3 +124,4 @@ function AddingFood({open, onClose, productName, nutriments, date, addingCategor
 }
 
 export default AddingFood
+

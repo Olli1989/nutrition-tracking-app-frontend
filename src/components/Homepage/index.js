@@ -16,35 +16,39 @@ function Homepage() {
         <Grid item xs={12} sm={6} order={{ xs: 1, sm: 1}}>
           <img src={HomepageFood} alt="Healthy food" />
         </Grid>
-        <Grid item xs={12} sm={6}  order={{ xs: 2, sm: 2}} sx={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
-          <Typography variant="h6" component="h3">
-            Food
-          </Typography>
-          <Box sx={{maxWidth: '450px'}}>
-            <Typography >
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero reprehenderit harum, nemo numquam repellat hic 
-              nam architecto voluptates quasi aliquam. Laboriosam nisi quasi voluptates labore quia culpa obcaecati fugit debitis!
+        <Grid item xs={12} sm={6}  order={{ xs: 2, sm: 2}} sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+          <Box>
+            <Typography variant="h6" component="h3">
+              Food
             </Typography>
-            <Typography >
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero reprehenderit harum, nemo numquam repellat hic 
-              nam architecto voluptates quasi aliquam. Laboriosam nisi quasi voluptates labore quia culpa obcaecati fugit debitis!
-            </Typography>
+            <Box sx={{maxWidth: '450px'}}>
+              <Typography >
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero reprehenderit harum, nemo numquam repellat hic 
+                nam architecto voluptates quasi aliquam. Laboriosam nisi quasi voluptates labore quia culpa obcaecati fugit debitis!
+              </Typography>
+              <Typography >
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero reprehenderit harum, nemo numquam repellat hic 
+                nam architecto voluptates quasi aliquam. Laboriosam nisi quasi voluptates labore quia culpa obcaecati fugit debitis!
+              </Typography>
+            </Box>
           </Box>
         </Grid>
 
-        <Grid item xs={12} sm={6} order={{ xs: 4, sm: 3}} sx={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
-          <Typography variant="h6" component="h3">
-            Sport
-          </Typography>
-          <Box sx={{maxWidth: '450px'}}>
-            <Typography >
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero reprehenderit harum, nemo numquam repellat hic 
-              nam architecto voluptates quasi aliquam. Laboriosam nisi quasi voluptates labore quia culpa obcaecati fugit debitis!
+        <Grid item xs={12} sm={6} order={{ xs: 4, sm: 3}} sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+          <Box>
+            <Typography variant="h6" component="h3">
+              Sport
             </Typography>
-            <Typography >
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero reprehenderit harum, nemo numquam repellat hic 
-              nam architecto voluptates quasi aliquam. Laboriosam nisi quasi voluptates labore quia culpa obcaecati fugit debitis!
-            </Typography>
+            <Box sx={{maxWidth: '450px'}}>
+              <Typography >
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero reprehenderit harum, nemo numquam repellat hic 
+                nam architecto voluptates quasi aliquam. Laboriosam nisi quasi voluptates labore quia culpa obcaecati fugit debitis!
+              </Typography>
+              <Typography >
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero reprehenderit harum, nemo numquam repellat hic 
+                nam architecto voluptates quasi aliquam. Laboriosam nisi quasi voluptates labore quia culpa obcaecati fugit debitis!
+              </Typography>
+            </Box>
           </Box>
         </Grid>
         <Grid item xs={12} sm={6} order={{xs: 3}}>
@@ -54,19 +58,21 @@ function Homepage() {
         <Grid item xs={12} sm={6} order={{ xs: 5}}>
           <img src={HomepageHealth} alt="Monitor with health indicator" />
         </Grid>
-        <Grid item xs={12} sm={6} order={{ xs: 6}}sx={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
-          <Typography variant="h6" component="h3">
-            Health
-          </Typography>
-          <Box sx={{maxWidth: '450px'}}>
-            <Typography >
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero reprehenderit harum, nemo numquam repellat hic 
-              nam architecto voluptates quasi aliquam. Laboriosam nisi quasi voluptates labore quia culpa obcaecati fugit debitis!
+        <Grid item xs={12} sm={6} order={{ xs: 6}} sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+          <Box>
+            <Typography variant="h6" component="h3">
+              Health
             </Typography>
-            <Typography >
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero reprehenderit harum, nemo numquam repellat hic 
-              nam architecto voluptates quasi aliquam. Laboriosam nisi quasi voluptates labore quia culpa obcaecati fugit debitis!
-            </Typography>
+            <Box sx={{maxWidth: '450px'}}>
+              <Typography >
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero reprehenderit harum, nemo numquam repellat hic 
+                nam architecto voluptates quasi aliquam. Laboriosam nisi quasi voluptates labore quia culpa obcaecati fugit debitis!
+              </Typography>
+              <Typography >
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero reprehenderit harum, nemo numquam repellat hic 
+                nam architecto voluptates quasi aliquam. Laboriosam nisi quasi voluptates labore quia culpa obcaecati fugit debitis!
+              </Typography>
+            </Box>
           </Box>
         </Grid>
       </Grid>
