@@ -85,12 +85,12 @@ export default function Header() {
               user ? (
                 <Box sx={{ml: 'auto'}}>
                   <MenuItem onClick={handleCloseNavMenu}>
-                    <Button component={BrowserLink} to={ROUTES.FOODDIARY} variant="outlined" color="secondary">
+                    <Button component={BrowserLink} to={ROUTES.FOODDIARY} variant="outlined" color="secondary" sx={{width: '100%'}}>
                       Food Diary
                     </Button>
                   </MenuItem>
                   <MenuItem onClick={handleCloseNavMenu}>
-                    <Button variant="outlined" color="secondary" onClick={logOut}>
+                    <Button variant="contained" color="secondary" onClick={logOut} sx={{width: '100%'}}>
                       Log Out
                     </Button>
                   </MenuItem>
@@ -99,12 +99,12 @@ export default function Header() {
               ):(
                 <Box sx={{ml: 'auto'}}>
                   <MenuItem onClick={handleCloseNavMenu}>
-                    <Button component={BrowserLink} to={ROUTES.LOGIN} variant="outlined" color="secondary">
+                    <Button component={BrowserLink} to={ROUTES.LOGIN} variant="outlined" color="secondary" sx={{width: '100%'}}>
                       Login
                     </Button>
                   </MenuItem>
                   <MenuItem onClick={handleCloseNavMenu}>
-                    <Button component={BrowserLink} to={ROUTES.SIGN_UP} variant="contained" color="secondary">
+                    <Button component={BrowserLink} to={ROUTES.SIGN_UP} variant="contained" color="secondary" sx={{width: '100%'}}>
                       Sign Up
                     </Button>
                   </MenuItem>
@@ -133,7 +133,7 @@ export default function Header() {
               {
               user ? (
                 <Box >
-                  <Button variant="outlined" color="secondary" onClick={logOut} >
+                  <Button variant="contained" color="secondary" onClick={logOut} >
                     Log Out
                   </Button>
                 </Box>

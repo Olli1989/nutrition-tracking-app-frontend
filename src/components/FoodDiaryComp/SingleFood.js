@@ -19,7 +19,7 @@ function SingleFood({productName , nutriments, date, addingCategory}) {
   return (
     <>
     {productName && 
-      <Box onClick={()=>setOpenSingleFoodDialog(true)} >
+      <Box onClick={()=>setOpenSingleFoodDialog(true)} sx={{borderRadius: '5px', p: 2}}>
         <Typography sx={{color: '#fff'}}><strong>{productName}</strong></Typography>
         
       </Box>

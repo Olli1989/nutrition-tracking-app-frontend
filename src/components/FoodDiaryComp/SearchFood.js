@@ -27,8 +27,7 @@ function SearchFood({openDialog,setOpenDialog, date, addingCategory}) {
           bgcolor="#777" 
           className="cursor"
           sx={{
-            borderRadius: '5px',
-            p: 1, 
+            borderRadius: '5px', 
             my: 1
           }}
         >

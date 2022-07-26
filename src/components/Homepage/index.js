@@ -10,7 +10,7 @@ function Homepage() {
   return (
     <>
       <Typography variant="h4" component="h2" sx={{textAlign: 'center', my: 4}}>
-        The Food Tracking World
+        The Food Tracking World - Cibus Contra
       </Typography>
       <Grid container spacing={2}  sx={{mb: 4}}>
         <Grid item xs={12} sm={6} order={{ xs: 1, sm: 1}}>
@@ -19,7 +19,7 @@ function Homepage() {
         <Grid item xs={12} sm={6}  order={{ xs: 2, sm: 2}} sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
           <Box>
             <Typography variant="h6" component="h3">
-              Food
+              Food - Cibus
             </Typography>
             <Box sx={{maxWidth: '450px'}}>
               <Typography >
@@ -37,7 +37,7 @@ function Homepage() {
         <Grid item xs={12} sm={6} order={{ xs: 4, sm: 3}} sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
           <Box>
             <Typography variant="h6" component="h3">
-              Sport
+              Sport - Ludis
             </Typography>
             <Box sx={{maxWidth: '450px'}}>
               <Typography >
@@ -61,7 +61,7 @@ function Homepage() {
         <Grid item xs={12} sm={6} order={{ xs: 6}} sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
           <Box>
             <Typography variant="h6" component="h3">
-              Health
+              Health - Sanitas
             </Typography>
             <Box sx={{maxWidth: '450px'}}>
               <Typography >

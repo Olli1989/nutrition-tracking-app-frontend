@@ -5,6 +5,7 @@ import * as ROUTES from './constants/routes';
 import UserContext from './context/UserContext'
 import ProtectedRoute from './services/protected-route/ProtectedRoute'
 import UserLoggedIn from './services/protected-route/UserLoggedIn'
+import Loading from './components/utility/Loading'
 
 import './app.css'
 
@@ -22,7 +23,7 @@ function App() {
   
   return (
     <Router>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Loading />}>
           <Routes>
             <Route path={ROUTES.DASHBOARD} element={<Dashboard/>} />
             <Route path={ROUTES.LOGIN} element={

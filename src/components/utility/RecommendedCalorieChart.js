@@ -86,20 +86,20 @@ function RecommendedCalorie({metabolism, date}) {
     datasets: [
       {
         data: [eatenCarb, carbLeft],
-        backgroundColor: [carbHigher? "red" : "rgb(80, 170, 80)", "#ccc"],
+        backgroundColor: [carbHigher? "red" : "#90BF3D", "#ccc"],
         labels: ['Carbs'],
         helper: [suggestedCarb, eatenCarb]
 
       },
       {
         data: [eatenProtein, proteinLeft],
-        backgroundColor: [proteinHigher? "red" : "goldenrod", "#ccc"],
+        backgroundColor: [proteinHigher? "red" : "#2AB899", "#ccc"],
         labels: ['Protein'],
         helper: [suggestedProtein, eatenProtein]        
       },
       {
         data: [eatenFat, fatLeft],
-        backgroundColor: [fatHigher? "red" : "green", "#ccc"],
+        backgroundColor: [fatHigher? "red" : "#B83255", "#ccc"],
         labels: ['Fats'],
         helper: [suggestedFat, eatenFat]
       }
@@ -111,7 +111,7 @@ function RecommendedCalorie({metabolism, date}) {
       <Doughnut data={data} options={options} height={200} width={200} />
       <div className="chartInner">
         <div className="chartStatus">KCAL LEFT</div>
-        <div className={`chartValue ${(metabolism-eatenKcal)<0 && 'calorieSurplus'}`}>{metabolism-eatenKcal}</div>
+        <div className={`chartValue ${(metabolism-eatenKcal)<0 && 'calorieSurplus'}`}>{Math.ceil(metabolism-eatenKcal)}</div>
       </div>
     </div>
   )
