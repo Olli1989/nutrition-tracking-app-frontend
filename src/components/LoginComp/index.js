@@ -41,7 +41,10 @@ function LoginComp() {
         setUser({token: data.token, email: userObject.email, diary: data.result.diary, personalData:data.result.personalData})
   
       } catch (e){
-        setServerError(e.response.data.message)
+        console.log(e)
+        if(e?.response){
+          setServerError(e.response.data.message)
+        }
         setIsLogin(false)
       }
       
