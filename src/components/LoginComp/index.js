@@ -70,7 +70,7 @@ function LoginComp() {
         Login to Member Area
       </Typography>
       
-      <Box sx={{display:'flex', flexDirection:'column'}}>
+      <Box sx={{display:'flex', flexDirection:'column', m: 1}}>
         {errorMessageEmail ? 
           <TextField error sx={{mb: 1.5}} value={emailAddress} onChange={({target})=>{setEmailAddress(target.value); setErrorMessageEmail("")}} helperText={errorMessageEmail} label="Error" InputLabelProps={{ shrink: true }}/>
           :

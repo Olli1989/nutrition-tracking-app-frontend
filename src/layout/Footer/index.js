@@ -11,15 +11,15 @@ function Footer() {
           <Toolbar>
             <Grid container justifyContent="space-between" alignItems="center">
               <Grid item>
-                <Button color="secondary" sx={{pl: 0}}>
+                <Button color="secondary" sx={{pl: 0, color: '#000'}}>
                   Impressum
                 </Button>
-                <Button color="secondary">
+                <Button color="secondary" sx={{color: '#000'}}>
                   Privacy
                 </Button>
               </Grid>
               <Grid item>
-                <Typography  color="secondary">
+                <Typography  color="secondary" sx={{color: '#000', fontWeight: 'bold'}}>
                   copyright &copy; Olli
                 </Typography>
 

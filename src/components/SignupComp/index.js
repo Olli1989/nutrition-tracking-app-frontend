@@ -149,7 +149,7 @@ function Signup() {
     {
       !isSuccessfullySigned ? 
       (
-        <Paper elevation={3} sx={{p:4, maxWidth:'400px', width: '100%'}} >
+        <Paper elevation={3} sx={{p:4, maxWidth:'400px', width: '100%', m:1}} >
           <Typography variant='h4' component='h2' sx={{mb: 2, textAlign:'center'}}>
             Sign Up
           </Typography>
