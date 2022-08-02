@@ -93,6 +93,21 @@ function Impressum() {
             <p>Quelle: 
                 <b><a href="https://fairesrecht.at/">fairesRecht.at</a></b> in Kooperation mit <b><a href="https://www.fairedaten.at/">Entschädigung für Datenleaks erhalten</a></b>
             </p>
+            <p><strong>Literaturverzeichnis:</strong></p>
+            <p>Unbekannt: Bewegungsmangel: Warum ist körperliche Bewegung wichtig? 
+                (URL: https://www.stiftung-gesundheitswissen.de/mediathek/videos/bewegung-gesuender-leben-mit-sport-und-bewegung/warum-ist-sport-wichtig-fuer-die
+                 [letzter Zugriff: 01.08.2022])
+            </p>
+            <p>Redaktion Gesundheitsportal: Warum wir essen müssen 
+                (URL: https://www.gesundheit.gv.at/leben/ernaehrung/info/warum-essen-wir.html
+                 [letzter Zugriff: 01.08.2022])
+            </p>
+            <p>Unbekannt: Warum ist psychische Gesundheit so wichtig?
+                (URL: https://www.erstehilfefuerdieseele.at/info/erstehilfe/warum-ist-psychische-gesundheit-so-wichtig/
+                 [letzter Zugriff: 01.08.2022])
+            </p>
+
+
         </Box>
     </Main>
 
