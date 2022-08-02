@@ -149,7 +149,7 @@ function Signup() {
     {
       !isSuccessfullySigned ? 
       (
-        <Paper elevation={3} sx={{p:4, minWidth:'400px', minHeight: '600px', m:1, display: 'flex', justifyContent: 'center', alignItems: 'center'}} >
+        <Paper elevation={3} sx={{p:4, minWidth:'400px',  m:1, display: 'flex', justifyContent: 'center', alignItems: 'center'}} >
           <Box>
             <Typography variant='h4' component='h2' sx={{mb: 2, textAlign:'center'}}>
               Sign Up

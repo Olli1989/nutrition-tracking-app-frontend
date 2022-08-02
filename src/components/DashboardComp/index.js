@@ -27,8 +27,8 @@ function DashboardComp() {
   const layout = [
     { i: "first", x:4, y:0, w:1, h:2 , maxH:3 },
     { i: "second", x:1, y:0, w:1, h:2 , maxH:3 },
-    { i: "third", x:2, y:0, w:1, h:2, minH: 2 , maxH:3 },
-    { i: "fourth", x:0, y:2, w:1, h:2 , minH: 2, maxH:3 },
+    { i: "third", x:2, y:2, w:1, h:2, minH: 2 , maxH:3 },
+    { i: "fourth", x:1, y:2, w:1, h:2 , minH: 2, maxH:3 },
     { i: "fifth", x:0, y:0, w:1, h:4 , minH:4, maxH:4},
   ] 
 
