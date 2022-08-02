@@ -6,6 +6,8 @@ import UserContext from './context/UserContext'
 import ProtectedRoute from './services/protected-route/ProtectedRoute'
 import UserLoggedIn from './services/protected-route/UserLoggedIn'
 import Loading from './components/utility/Loading'
+import Privacy from './pages/Privacy'
+import Impressum from './pages/Impressum';
 
 import './app.css'
 
@@ -14,7 +16,6 @@ const FoodDiary = lazy(() => import('./pages/FoodDiary'));
 const SignUp = lazy(() => import('./pages/Signup'));
 const Login = lazy(() => import('./pages/Login'));
 const NotFound = lazy(() => import('./pages/NotFound'));
-
 
 
 function App() {
@@ -41,6 +42,8 @@ function App() {
                 <FoodDiary/>
               </ProtectedRoute>
             } />
+            <Route path={ROUTES.PRIVACY} element={<Privacy/>}/>
+            <Route path={ROUTES.IMPRESSUM} element={<Impressum/>}/>
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

@@ -1,5 +1,7 @@
 import React from 'react'
+import { Link as BrowserLink } from 'react-router-dom'
 
+import * as ROUTES from '../../constants/routes'
 import { AppBar, Toolbar, Typography, Container, Button, Grid } from '@mui/material'
 import './footer.css'
 
@@ -11,10 +13,10 @@ function Footer() {
           <Toolbar>
             <Grid container justifyContent="space-between" alignItems="center">
               <Grid item>
-                <Button color="secondary" sx={{pl: 0, color: '#000'}}>
+                <Button color="secondary" sx={{pl: 0, color: '#000'}} component={BrowserLink} to={ROUTES.IMPRESSUM}>
                   Impressum
                 </Button>
-                <Button color="secondary" sx={{color: '#000'}}>
+                <Button color="secondary" sx={{color: '#000'}} component={BrowserLink} to={ROUTES.PRIVACY}>
                   Privacy
                 </Button>
               </Grid>

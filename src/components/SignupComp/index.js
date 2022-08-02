@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react'
-import { Paper, Typography } from '@mui/material'
+import { Paper, Typography, Box } from '@mui/material'
 import jwt_decode from 'jwt-decode'
 
 import UserDetails from './SignupComponents/UserDetails'
@@ -149,14 +149,16 @@ function Signup() {
     {
       !isSuccessfullySigned ? 
       (
-        <Paper elevation={3} sx={{p:4, maxWidth:'400px', width: '100%', m:1}} >
-          <Typography variant='h4' component='h2' sx={{mb: 2, textAlign:'center'}}>
-            Sign Up
-          </Typography>
-          <SignupHeader step={step} />
-          {renderSwitch(step)}
-          <LeftRightButton prevDisabled={step===1||step===4?true:false} nextDisabled={step===3?true:false} prevStep={prevStep} nextStep={nextStep}/>
-          <SignupFooterText />
+        <Paper elevation={3} sx={{p:4, minWidth:'400px', minHeight: '600px', m:1, display: 'flex', justifyContent: 'center', alignItems: 'center'}} >
+          <Box>
+            <Typography variant='h4' component='h2' sx={{mb: 2, textAlign:'center'}}>
+              Sign Up
+            </Typography>
+            <SignupHeader step={step} />
+            {renderSwitch(step)}
+            <LeftRightButton prevDisabled={step===1||step===4?true:false} nextDisabled={step===3?true:false} prevStep={prevStep} nextStep={nextStep}/>
+            <SignupFooterText />
+          </Box>
         </Paper>
       ):(
         <Success/>

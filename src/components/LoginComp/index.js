@@ -65,7 +65,7 @@ function LoginComp() {
   },[user])
 
   return (
-    <Paper elevation={3} sx={{py:4, px:2, maxWidth:'400px'}} >
+    <Paper elevation={3} sx={{py:4, px:4, maxWidth:'450px'}} >
       <Typography variant='h4' component='h2' sx={{mb: 2, textAlign:'center'}}>
         Login to Member Area
       </Typography>
