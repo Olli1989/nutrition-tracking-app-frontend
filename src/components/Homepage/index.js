@@ -18,17 +18,22 @@ function Homepage() {
         </Grid>
         <Grid item xs={12} sm={6}  order={{ xs: 2, sm: 2}} sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
           <Box>
-            <Typography variant="h6" component="h3">
+            <Typography variant="h6" component="h3" sx={{mb: 2}}>
               Food
             </Typography>
             <Box sx={{maxWidth: '450px'}}>
               <Typography >
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero reprehenderit harum, nemo numquam repellat hic 
-                nam architecto voluptates quasi aliquam. Laboriosam nisi quasi voluptates labore quia culpa obcaecati fugit debitis!
+              Die Nährstoffe Kohlenhydrate, Eiweiße und Fette sowie Vitamine, Mineralstoffe und Wasser haben im Körper viele 
+              unterschiedliche Funktionen. Sie versorgen den Körper jeden Tag mit lebenswichtigen Substanzen, liefern Energie 
+              und halten im Idealfall gesund und fit.
+              Ist die Nahrung „optimal“, versorgt sie den Körper mit allen Nährstoffen in der nötigen Menge, die der Körper braucht, 
+              um abgebaute und ausgeschiedene Stoffe auszugleichen. Außerdem liefert sie die dafür benötigte Energie.
+              </Typography>
+              <Typography sx={{mb: 1}}>
+              (Redaktion Gesundheitsportal, 2022)
               </Typography>
               <Typography >
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero reprehenderit harum, nemo numquam repellat hic 
-                nam architecto voluptates quasi aliquam. Laboriosam nisi quasi voluptates labore quia culpa obcaecati fugit debitis!
+                <strong>„Wir leben nicht, um zu essen, sondern wir essen, um zu leben.“ </strong> - Sokrates
               </Typography>
             </Box>
           </Box>
@@ -36,17 +41,21 @@ function Homepage() {
 
         <Grid item xs={12} sm={6} order={{ xs: 4, sm: 3}} sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
           <Box>
-            <Typography variant="h6" component="h3">
+            <Typography variant="h6" component="h3" sx={{mb: 2}}>
               Sport
             </Typography>
             <Box sx={{maxWidth: '450px'}}>
               <Typography >
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero reprehenderit harum, nemo numquam repellat hic 
-                nam architecto voluptates quasi aliquam. Laboriosam nisi quasi voluptates labore quia culpa obcaecati fugit debitis!
+              Der menschliche Körper ist für ein Leben mit Bewegung gemacht. Bewegt man sich zu wenig, verfällt der Körper. 
+              Durch Bewegung werden verschiedene Prozesse und Funktionen im Körper positiv beeinflusst und das Risiko für 
+              Erkrankungen gemindert. 
+              </Typography>
+              <Typography sx={{mb: 1}}>
+              (Stiftung Gesundheits Wissen, 2022)
               </Typography>
               <Typography >
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero reprehenderit harum, nemo numquam repellat hic 
-                nam architecto voluptates quasi aliquam. Laboriosam nisi quasi voluptates labore quia culpa obcaecati fugit debitis!
+              <strong>„Einen von zwei Schmerzen müssen wir ertragen: den Schmerz der Disziplin oder den eines schlechten Gewissens. 
+              Der Unterschied ist, Disziplin wiegt Gramm, ein schlechtes Gewissen wiegt Tonnen.“</strong> – Jim Rohn
               </Typography>
             </Box>
           </Box>
@@ -60,17 +69,19 @@ function Homepage() {
         </Grid>
         <Grid item xs={12} sm={6} order={{ xs: 6}} sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
           <Box>
-            <Typography variant="h6" component="h3">
+            <Typography variant="h6" component="h3" sx={{mb: 2}}>
               Health
             </Typography>
             <Box sx={{maxWidth: '450px'}}>
               <Typography >
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero reprehenderit harum, nemo numquam repellat hic 
-                nam architecto voluptates quasi aliquam. Laboriosam nisi quasi voluptates labore quia culpa obcaecati fugit debitis!
+              Mens sana in corpore sano – dieser Leitsatz gilt auch umgekehrt: Eine gesunde Psyche ist wichtig für das gesamte Wohlbefinden 
+              des Menschen. Psychische Gesundheit macht robust, sie lässt uns das Leben genießen, sie hilft Schmerz und Enttäuschung besser zu verkraften. 
+              </Typography>
+              <Typography sx={{mb: 1}}>
+              (Erste Hilfe für die Seele,2022)
               </Typography>
               <Typography >
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero reprehenderit harum, nemo numquam repellat hic 
-                nam architecto voluptates quasi aliquam. Laboriosam nisi quasi voluptates labore quia culpa obcaecati fugit debitis!
+                <strong>„Kümmere dich um deinen Körper. Es ist der einzige Ort, den du zum Leben hast.“</strong> - Jim Rohn
               </Typography>
             </Box>
           </Box>
