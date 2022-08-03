@@ -46,11 +46,19 @@ function RecommendedCalorie({metabolism, date}) {
         callbacks: {
           label: (data) => {
             let label =""
-            if(data.dataset.data[1] === 0){
+            if(data.dataset.data[1] === 0 && data.dataset.labels[0] === "Fats"){
               let calc = Math.ceil((data.dataset.helper[0]/9.1)-data.dataset.helper[1])
-              label = data.dataset.labels[0] + ' eaten: ' + data.dataset.data[0] + 'g, Left: ' + calc   + 'g'
-            } else {
-              label = data.dataset.labels[0] + ' eaten: ' + data.dataset.data[0] + 'g, Left: ' + data.dataset.data[1] + 'g'
+              label = data.dataset.labels[0] + ' eaten: ' + Math.ceil(data.dataset.data[0]) + 'g, Left: ' + calc   + 'g'
+            } else if(data.dataset.data[1] === 0 && data.dataset.labels[0] === "Carbs" ){
+              let calc = Math.ceil(data.dataset.helper[0]-data.dataset.helper[1])
+              label = data.dataset.labels[0] + ' eaten: ' + Math.ceil(data.dataset.data[0]) + 'g, Left: ' + calc   + 'g'
+            }else if(data.dataset.data[1] === 0 && data.dataset.labels[0] === "Protein" ){
+              let calc = Math.ceil((data.dataset.helper[0]/4.1)-data.dataset.helper[1])
+              label = data.dataset.labels[0] + ' eaten: ' + Math.ceil(data.dataset.data[0]) + 'g, Left: ' + calc   + 'g'
+            }
+            
+            else{
+              label = data.dataset.labels[0] + ' eaten: ' + Math.ceil(data.dataset.data[0]) + 'g, Left: ' + Math.ceil(data.dataset.data[1]) + 'g'
             }
      
             return label;
